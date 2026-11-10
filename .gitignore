@@ -40,3 +40,4 @@ repo/
 !**/src/**/repo/
 
 .github/
+src/main/templates/
