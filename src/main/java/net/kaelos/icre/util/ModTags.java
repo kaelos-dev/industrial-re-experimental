@@ -1,0 +1,27 @@
+package net.kaelos.icre.util;
+
+import net.kaelos.icre.ICRE;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+public class ModTags {
+    public static class Blocks {
+        private static TagKey<Block> createTag(String name) {
+            return BlockTags.create(ICRE.makeId(name));
+        }
+    }
+
+    public static class Items {
+        public static final TagKey<Item> INGOT_ITEMS = createTag("ingot_items");
+        public static final TagKey<Item> PLATE_ITEMS = createTag("plate_items");
+        public static final TagKey<Item> DENSE_PLATE_ITEMS = createTag("dense_plate_items");
+        public static final TagKey<Item> CASING_ITEMS = createTag("casing_items");
+
+        private static TagKey<Item> createTag(String name) {
+            return ItemTags.create(ICRE.makeId(name));
+        }
+    }
+}
