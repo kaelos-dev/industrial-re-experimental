@@ -1,11 +1,15 @@
 package net.kaelos.icre.datagen;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.worldgen.ModWorldGen;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.List;
 import java.util.Set;
@@ -31,5 +35,10 @@ public class DataGenerators {
         )));
 
         event.createBlockAndItemTags(ModBlockTagsProvider::new, ModBlockTagsProvider.ModItemTagsProvider::new);
+
+        event.createDatapackRegistryObjects(new RegistrySetBuilder()
+                .add(Registries.CONFIGURED_FEATURE, ModWorldGen::configured)
+                .add(Registries.PLACED_FEATURE, ModWorldGen::placed)
+                .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModWorldGen::biomeModifiers));
     }
 }
