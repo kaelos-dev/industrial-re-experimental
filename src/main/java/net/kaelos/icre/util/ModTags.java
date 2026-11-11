@@ -9,6 +9,8 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Blocks {
+        public static final TagKey<Block> ORE_BLOCKS = createTag("ore_blocks");
+
         private static TagKey<Block> createTag(String name) {
             return BlockTags.create(ICRE.makeId(name));
         }

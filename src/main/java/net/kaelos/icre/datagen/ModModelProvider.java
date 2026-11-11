@@ -1,6 +1,7 @@
 package net.kaelos.icre.datagen;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.definitions.ModBlocks;
 import net.kaelos.icre.definitions.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -13,6 +14,7 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
 public class ModModelProvider extends ModelProvider {
@@ -55,6 +57,24 @@ public class ModModelProvider extends ModelProvider {
         flatItem(itemModels, ModItems.LEAD_CASING.get(), "casing/lead_casing", ModelTemplates.FLAT_ITEM);
         flatItem(itemModels, ModItems.STEEL_CASING.get(), "casing/steel_casing", ModelTemplates.FLAT_ITEM);
         flatItem(itemModels, ModItems.TIN_CASING.get(), "casing/tin_casing", ModelTemplates.FLAT_ITEM);
+
+        cubeBlock(blockModels, ModBlocks.LEAD_ORE.get(), "ore/lead_ore");
+        cubeBlock(blockModels, ModBlocks.DEEPSLATE_LEAD_ORE.get(), "ore/deepslate_lead_ore");
+        cubeBlock(blockModels, ModBlocks.TIN_ORE.get(), "ore/tin_ore");
+        cubeBlock(blockModels, ModBlocks.DEEPSLATE_TIN_ORE.get(), "ore/deepslate_tin_ore");
+        cubeBlock(blockModels, ModBlocks.DEEPSLATE_URANIUM_ORE.get(), "ore/deepslate_uranium_ore");
+
+        flatItem(itemModels, ModItems.RAW_LEAD.get(), "raw/raw_lead", ModelTemplates.FLAT_ITEM);
+        flatItem(itemModels, ModItems.RAW_TIN.get(), "raw/raw_tin", ModelTemplates.FLAT_ITEM);
+        flatItem(itemModels, ModItems.RAW_URANIUM.get(), "raw/raw_uranium", ModelTemplates.FLAT_ITEM);
+    }
+
+    private static void cubeBlock(BlockModelGenerators blockModels, Block block, String texturePath) {
+        Material material = new Material(ICRE.makeId("block/" + texturePath));
+        TextureMapping mapping = TextureMapping.cube(material);
+        Identifier modelId = ModelTemplates.CUBE_ALL.create(block, mapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(modelId)));
+        blockModels.registerSimpleItemModel(block, modelId);
     }
 
     private static void flatItem(ItemModelGenerators itemModels, Item item, String texturePath, ModelTemplate template) {

@@ -46,6 +46,10 @@ public class ModItems {
     public static final DeferredItem<Item> STEEL_CASING = registerItem("steel_casing", Item::new);
     public static final DeferredItem<Item> TIN_CASING = registerItem("tin_casing", Item::new);
 
+    public static final DeferredItem<Item> RAW_LEAD = registerItem("raw_lead", Item::new);
+    public static final DeferredItem<Item> RAW_TIN = registerItem("raw_tin", Item::new);
+    public static final DeferredItem<Item> RAW_URANIUM = registerItem("raw_uranium", Item::new);
+
     private static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> factory) {
         return ITEMS.registerItem(name, factory);
     }

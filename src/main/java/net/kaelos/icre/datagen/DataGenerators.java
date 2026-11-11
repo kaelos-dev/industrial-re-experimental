@@ -20,10 +20,7 @@ public class DataGenerators {
         for (ModLanguageProvider.Locale locale : ModLanguageProvider.Locale.values()) {
             event.createProvider(output -> new ModLanguageProvider(output, locale));
         }
-    }
 
-    @SubscribeEvent
-    public static void gatherServerData(GatherDataEvent.Server event) {
         event.createProvider(ModRecipeProvider.Runner::new);
 
         event.createProvider(((output, lookupProvider) -> new LootTableProvider(

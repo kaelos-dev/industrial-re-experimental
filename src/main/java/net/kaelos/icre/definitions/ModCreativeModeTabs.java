@@ -53,6 +53,16 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.LEAD_CASING.get());
                 output.accept(ModItems.STEEL_CASING.get());
                 output.accept(ModItems.TIN_CASING.get());
+
+                output.accept(ModBlocks.LEAD_ORE.get());
+                output.accept(ModBlocks.DEEPSLATE_LEAD_ORE.get());
+                output.accept(ModBlocks.TIN_ORE.get());
+                output.accept(ModBlocks.DEEPSLATE_TIN_ORE.get());
+                output.accept(ModBlocks.DEEPSLATE_URANIUM_ORE.get());
+
+                output.accept(ModItems.RAW_LEAD.get());
+                output.accept(ModItems.RAW_TIN.get());
+                output.accept(ModItems.RAW_URANIUM.get());
             }
     );
 
