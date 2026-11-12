@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.kaelos.icre.definitions.ModBlocks;
 import net.kaelos.icre.definitions.ModCreativeModeTabs;
 import net.kaelos.icre.definitions.ModItems;
+import net.kaelos.icre.definitions.ModPlacers;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -23,5 +24,6 @@ public class ICRE {
         ModItems.register(eventBus);
         ModCreativeModeTabs.register(eventBus);
         ModBlocks.register(eventBus);
+        ModPlacers.register(eventBus);
     }
 }
