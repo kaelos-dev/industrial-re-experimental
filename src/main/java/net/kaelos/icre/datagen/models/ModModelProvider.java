@@ -59,6 +59,6 @@ public class ModModelProvider extends ModelProvider {
 
     private static void registerTools(ItemModelGenerators itemModels) {
         ModelHelpers.flatHandheldItems(itemModels, "tool",
-                ModItems.TREETAP);
+                ModItems.TREETAP, ModItems.FORGE_HAMMER, ModItems.CUTTER);
     }
 }

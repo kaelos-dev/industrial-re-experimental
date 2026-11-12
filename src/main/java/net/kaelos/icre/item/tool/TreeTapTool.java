@@ -12,8 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
-public class TreeTapItem extends Item {
-    public TreeTapItem(Properties properties) {
+public class TreeTapTool extends Item {
+    public TreeTapTool(Properties properties) {
         super(properties
                 .stacksTo(1)
                 .durability(16));

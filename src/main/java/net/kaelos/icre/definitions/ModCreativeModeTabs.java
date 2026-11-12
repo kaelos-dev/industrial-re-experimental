@@ -105,6 +105,8 @@ public class ModCreativeModeTabs {
             ModItems.TREETAP,
             (parameters, output) -> {
                 output.accept(ModItems.TREETAP.get());
+                output.accept(ModItems.FORGE_HAMMER.get());
+                output.accept(ModItems.CUTTER.get());
             }
     );
 

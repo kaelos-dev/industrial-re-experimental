@@ -2,7 +2,8 @@ package net.kaelos.icre.definitions;
 
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.item.LatexItem;
-import net.kaelos.icre.item.tool.TreeTapItem;
+import net.kaelos.icre.item.tool.CraftingTool;
+import net.kaelos.icre.item.tool.TreeTapTool;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -62,7 +63,9 @@ public class ModItems {
     public static final DeferredItem<Item> RUBBER = registerItem("rubber", Item::new);
 
     // ==================== Tools ====================
-    public static final DeferredItem<TreeTapItem> TREETAP = registerItem("treetap", TreeTapItem::new);
+    public static final DeferredItem<TreeTapTool> TREETAP = registerItem("treetap", TreeTapTool::new);
+    public static final DeferredItem<Item> FORGE_HAMMER = registerItem("forge_hammer", prop -> new CraftingTool(prop, 80));
+    public static final DeferredItem<Item> CUTTER = registerItem("cutter", prop -> new CraftingTool(prop, 60));
 
     private static <T extends Item> DeferredItem<T> registerItem(String name, Function<Item.Properties, T> factory) {
         return ITEMS.registerItem(name, factory);
