@@ -16,6 +16,7 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ICRE.MOD_ID);
 
+    // ==================== Resources Tab ====================
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> RESOURCES_TAB = registerTab(
             "resources_tab",
             ModItems.BRONZE_INGOT,
@@ -63,6 +64,47 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.RAW_LEAD.get());
                 output.accept(ModItems.RAW_TIN.get());
                 output.accept(ModItems.RAW_URANIUM.get());
+
+                output.accept(ModItems.LATEX.get());
+                output.accept(ModItems.RUBBER.get());
+            }
+    );
+
+    // ==================== Agriculture Tab ====================
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AGRICULTURE_TAB = registerTab(
+            "agriculture_tab",
+            ModBlocks.RUBBER_SAPLING,
+            (parameters, output) -> {
+                output.accept(ModBlocks.RUBBER_LOG.get());
+                output.accept(ModBlocks.RUBBER_WOOD.get());
+                output.accept(ModBlocks.STRIPPED_RUBBER_LOG.get());
+                output.accept(ModBlocks.STRIPPED_RUBBER_WOOD.get());
+                output.accept(ModBlocks.RUBBER_PLANKS.get());
+                output.accept(ModBlocks.RUBBER_LEAVES.get());
+                output.accept(ModBlocks.RUBBER_SAPLING.get());
+            }
+    );
+
+    // ==================== Components Tab ====================
+//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COMPONENTS_TAB = registerTab(
+//            "components_tab",
+//            ModBlocks.BATTERY,
+//            (parameters, output) -> {}
+//    );
+
+    // ==================== Machines Tab ====================
+//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MACHINES_TAB = registerTab(
+//            "machines_tab",
+//            ModBlocks.MACERATOR,
+//            (parameters, output) -> {}
+//    );
+
+    // ==================== Tools Tab ====================
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = registerTab(
+            "tools_tab",
+            ModItems.TREETAP,
+            (parameters, output) -> {
+                output.accept(ModItems.TREETAP.get());
             }
     );
 

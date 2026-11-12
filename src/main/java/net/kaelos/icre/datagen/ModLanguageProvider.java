@@ -31,6 +31,8 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         add("creativetab." + ICRE.MOD_ID + ".resources_tab", "IC-RE: Resources");
+        add("creativetab." + ICRE.MOD_ID + ".agriculture_tab", "IC-RE: Agriculture");
+        add("creativetab." + ICRE.MOD_ID + ".tools_tab", "IC-RE: Tools");
 
         // Ingots
         add(ModItems.BRONZE_INGOT.get(), "Bronze Ingot", "Бронзовый слиток", "Бронзовий злиток");
@@ -81,6 +83,22 @@ public class ModLanguageProvider extends LanguageProvider {
         add(ModItems.RAW_LEAD.get(), "Raw Lead", "Глыба свинца", "Брила свинцю");
         add(ModItems.RAW_TIN.get(), "Raw Tin", "Глыба олова", "Брила олова");
         add(ModItems.RAW_URANIUM.get(), "Raw Uranium", "Глыба урана", "Брила урану");
+
+        // Rubber Tree
+        add(ModBlocks.RUBBER_LOG.get(), "Rubber Log", "Бревно гевеи", "Колода гевеї");
+        add(ModBlocks.STRIPPED_RUBBER_LOG.get(), "Stripped Rubber Log", "Обтёсанное бревно гевеи", "Обтесана колода гевеї");
+        add(ModBlocks.RUBBER_WOOD.get(), "Rubber Wood", "Древесина гевеи", "Деревина гевеї");
+        add(ModBlocks.STRIPPED_RUBBER_WOOD.get(), "Stripped Rubber Wood", "Обтёсанная древесина гевеи", "Обтесана деревина гевеї");
+        add(ModBlocks.RUBBER_LEAVES.get(), "Rubber Leaves", "Листва гевеи", "Листя гевеї");
+        add(ModBlocks.RUBBER_SAPLING.get(), "Rubber Sapling", "Саженец гевеи", "Саджанець гевеї");
+        add(ModBlocks.RUBBER_PLANKS.get(), "Rubber Planks", "Доски из гевеи", "Дошки з гевеї");
+
+        // Components
+        add(ModItems.LATEX.get(), "Latex", "Каучук", "Каучук");
+        add(ModItems.RUBBER.get(), "Rubber", "Резина", "Гума");
+
+        // Tools
+        add(ModItems.TREETAP.get(), "Treetap", "Краник", "Краник");
     }
 
     private void add(Item item, String en, String ru, String uk) {

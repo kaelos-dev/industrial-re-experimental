@@ -1,6 +1,10 @@
 package net.kaelos.icre.datagen;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.datagen.models.ModModelProvider;
+import net.kaelos.icre.datagen.tags.ModBiomeTagsProvider;
+import net.kaelos.icre.datagen.tags.ModBlockTagsProvider;
+import net.kaelos.icre.datagen.tags.ModItemTagsProvider;
 import net.kaelos.icre.worldgen.ModWorldGen;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -34,11 +38,13 @@ public class DataGenerators {
                 lookupProvider
         )));
 
-        event.createBlockAndItemTags(ModBlockTagsProvider::new, ModBlockTagsProvider.ModItemTagsProvider::new);
+        event.createBlockAndItemTags(ModBlockTagsProvider::new, ModItemTagsProvider::new);
 
         event.createDatapackRegistryObjects(new RegistrySetBuilder()
                 .add(Registries.CONFIGURED_FEATURE, ModWorldGen::configured)
                 .add(Registries.PLACED_FEATURE, ModWorldGen::placed)
                 .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModWorldGen::biomeModifiers));
+
+        event.createProvider(ModBiomeTagsProvider::new);
     }
 }
