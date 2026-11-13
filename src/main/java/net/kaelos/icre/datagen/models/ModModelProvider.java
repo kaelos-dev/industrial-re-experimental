@@ -1,6 +1,8 @@
 package net.kaelos.icre.datagen.models;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.datagen.models.electric.CableModels;
+import net.kaelos.icre.datagen.models.electric.MachineModels;
 import net.kaelos.icre.datagen.models.rubber.RubberTreeModels;
 import net.kaelos.icre.definitions.ModBlocks;
 import net.kaelos.icre.definitions.ModItems;
@@ -22,6 +24,8 @@ public class ModModelProvider extends ModelProvider {
         registerTools(itemModels);
 
         RubberTreeModels.register(blockModels);
+        CableModels.register(blockModels);
+        MachineModels.register(blockModels);
     }
 
     private static void registerMaterials(ItemModelGenerators itemModels) {
@@ -61,4 +65,12 @@ public class ModModelProvider extends ModelProvider {
         ModelHelpers.flatHandheldItems(itemModels, "tool",
                 ModItems.TREETAP, ModItems.FORGE_HAMMER, ModItems.CUTTER);
     }
+
+//    private static void registerCables(BlockModelGenerators blockModels) {
+//        ModelHelpers.cableBlocks(blockModels, ModBlocks.TIN_CABLE.get(), 2);
+//        ModelHelpers.cableBlocks(blockModels, ModBlocks.COPPER_CABLE.get(), 2);
+//        ModelHelpers.cableBlocks(blockModels, ModBlocks.GOLD_CABLE.get(), 2);
+//        ModelHelpers.cableBlocks(blockModels, ModBlocks.IRON_CABLE.get(), 2);
+//        ModelHelpers.cableBlocks(blockModels, ModBlocks.GLASS_FIBRE_CABLE.get(), 2);
+//    }
 }

@@ -1,4 +1,4 @@
-package net.kaelos.icre.datagen;
+package net.kaelos.icre.datagen.loot;
 
 import net.kaelos.icre.block.rubber.RubberLogBlock;
 import net.kaelos.icre.definitions.ModBlocks;
@@ -34,7 +34,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
             1.0F / 18.0F
     };
 
-    protected ModBlockLootSubProvider(HolderLookup.Provider registries) {
+    public ModBlockLootSubProvider(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
@@ -54,6 +54,15 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RUBBER_SAPLING.get());
         add(ModBlocks.RUBBER_LEAVES.get(), block ->
                 this.createLeavesDrops(block, ModBlocks.RUBBER_SAPLING.get(), RUBBER_LEAVES_SAPLING_CHANCES));
+
+        dropSelf(ModBlocks.TIN_CABLE.get());
+        dropSelf(ModBlocks.COPPER_CABLE.get());
+        dropSelf(ModBlocks.GOLD_CABLE.get());
+        dropSelf(ModBlocks.IRON_CABLE.get());
+        dropSelf(ModBlocks.GLASS_FIBRE_CABLE.get());
+
+        dropSelf(ModBlocks.GENERATOR.get());
+        dropSelf(ModBlocks.MACERATOR.get());
     }
 
     private LootTable.Builder createMultipleOreDrops(Block block, Item item, float minDrops, float maxDrops) {

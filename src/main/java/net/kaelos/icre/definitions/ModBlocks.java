@@ -1,7 +1,11 @@
 package net.kaelos.icre.definitions;
 
 import net.kaelos.icre.ICRE;
-import net.kaelos.icre.block.OreBlock;
+import net.kaelos.icre.api.energy.VoltageTier;
+import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.machine.generating.GeneratorBlock;
+import net.kaelos.icre.block.machine.producing.MaceratorBlock;
+import net.kaelos.icre.block.ore.OreBlock;
 import net.kaelos.icre.block.rubber.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,6 +39,24 @@ public class ModBlocks {
     public static final DeferredBlock<RubberLeavesBlock> RUBBER_LEAVES = registerBlock("rubber_leaves", RubberLeavesBlock::new);
     public static final DeferredBlock<RubberSaplingBlock> RUBBER_SAPLING = registerBlock("rubber_sapling", RubberSaplingBlock::new);
     public static final DeferredBlock<RubberPlanksBlock> RUBBER_PLANKS = registerBlock("rubber_planks", RubberPlanksBlock::new);
+
+    // ==================== Cables ====================
+    public static final DeferredBlock<CableBlock> TIN_CABLE = registerBlock("tin_cable", prop ->
+            new CableBlock(prop, VoltageTier.LV, false, 2));
+    public static final DeferredBlock<CableBlock> COPPER_CABLE = registerBlock("copper_cable", prop ->
+            new CableBlock(prop, VoltageTier.MV, false, 2));
+    public static final DeferredBlock<CableBlock> GOLD_CABLE = registerBlock("gold_cable", prop ->
+            new CableBlock(prop, VoltageTier.HV, false, 2));
+    public static final DeferredBlock<CableBlock> IRON_CABLE = registerBlock("iron_cable", prop ->
+            new CableBlock(prop, VoltageTier.EV, false, 2));
+    public static final DeferredBlock<CableBlock> GLASS_FIBRE_CABLE = registerBlock("glass_fibre_cable", prop ->
+            new CableBlock(prop, VoltageTier.IV, true, 2));
+
+    // ==================== Generators ====================
+    public static final DeferredBlock<GeneratorBlock> GENERATOR = registerBlock("generator", GeneratorBlock::new);
+
+    // ==================== Machines ====================
+    public static final DeferredBlock<MaceratorBlock> MACERATOR = registerBlock("macerator", MaceratorBlock::new);
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> factory) {
         DeferredBlock<T> object = BLOCKS.registerBlock(name, factory);

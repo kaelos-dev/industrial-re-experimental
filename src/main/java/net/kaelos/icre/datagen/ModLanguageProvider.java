@@ -99,6 +99,9 @@ public class ModLanguageProvider extends LanguageProvider {
 
         // Tools
         add(ModItems.TREETAP.get(), "Treetap", "Краник", "Краник");
+
+        // Tooltips
+        add("tooltip." + ICRE.MOD_ID + ".durability", pick("Durability: ", "Прочность: ", "Міцність: "));
     }
 
     private void add(Item item, String en, String ru, String uk) {
@@ -107,6 +110,10 @@ public class ModLanguageProvider extends LanguageProvider {
 
     private void add(Block block, String en, String ru, String uk) {
         add(block, pick(en, ru, uk));
+    }
+
+    private void add(String name, String en, String ru, String uk) {
+        add(name, pick(en, ru, uk));
     }
 
     private String pick(String en, String ru, String uk) {

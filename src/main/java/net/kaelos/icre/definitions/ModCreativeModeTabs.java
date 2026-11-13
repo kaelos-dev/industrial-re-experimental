@@ -86,18 +86,27 @@ public class ModCreativeModeTabs {
     );
 
     // ==================== Components Tab ====================
-//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COMPONENTS_TAB = registerTab(
-//            "components_tab",
-//            ModBlocks.BATTERY,
-//            (parameters, output) -> {}
-//    );
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COMPONENTS_TAB = registerTab(
+            "components_tab",
+            ModBlocks.TIN_CABLE,
+            (parameters, output) -> {
+                output.accept(ModBlocks.TIN_CABLE.get());
+                output.accept(ModBlocks.COPPER_CABLE.get());
+                output.accept(ModBlocks.GOLD_CABLE.get());
+                output.accept(ModBlocks.IRON_CABLE.get());
+                output.accept(ModBlocks.GLASS_FIBRE_CABLE.get());
+            }
+    );
 
     // ==================== Machines Tab ====================
-//    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MACHINES_TAB = registerTab(
-//            "machines_tab",
-//            ModBlocks.MACERATOR,
-//            (parameters, output) -> {}
-//    );
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MACHINES_TAB = registerTab(
+            "machines_tab",
+            ModBlocks.MACERATOR,
+            (parameters, output) -> {
+                output.accept(ModBlocks.GENERATOR.get());
+                output.accept(ModBlocks.MACERATOR.get());
+            }
+    );
 
     // ==================== Tools Tab ====================
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = registerTab(

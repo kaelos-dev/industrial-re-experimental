@@ -4,10 +4,7 @@ import net.kaelos.icre.ICRE;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
-import net.minecraft.client.data.models.model.ItemModelUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -70,8 +67,15 @@ public class ModelHelpers {
         }
     }
 
-    // --- Rubber Tree ---
+    // --- Cables ---
+    public static void flatBlockItem(BlockModelGenerators blockModels, Block block, Material texture) {
+        Identifier itemModelId = ModelTemplates.FLAT_ITEM.create(
+                block.asItem(), TextureMapping.layer0(texture), blockModels.modelOutput
+        );
+        blockModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(itemModelId));
+    }
 
+    // --- Rubber Tree ---
     public static void pillarWithHorizontal(BlockModelGenerators blockModels, Block block, Material side, Material end) {
         TextureMapping mapping = TextureMapping.column(side, end);
         Identifier verticalId = ModelTemplates.CUBE_COLUMN.create(block, mapping, blockModels.modelOutput);
@@ -111,7 +115,6 @@ public class ModelHelpers {
                 )
         );
 
-        Identifier itemModelId = ModelTemplates.FLAT_ITEM.create(sapling.asItem(), TextureMapping.layer0(texture), blockModels.modelOutput);
-        blockModels.itemModelOutput.accept(sapling.asItem(), ItemModelUtils.plainModel(itemModelId));
+        flatBlockItem(blockModels, sapling, texture);
     }
 }

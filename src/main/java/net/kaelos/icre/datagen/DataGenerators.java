@@ -1,6 +1,7 @@
 package net.kaelos.icre.datagen;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.datagen.loot.ModBlockLootSubProvider;
 import net.kaelos.icre.datagen.models.ModModelProvider;
 import net.kaelos.icre.datagen.tags.ModBiomeTagsProvider;
 import net.kaelos.icre.datagen.tags.ModBlockTagsProvider;

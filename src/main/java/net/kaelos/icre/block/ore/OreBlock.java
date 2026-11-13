@@ -1,4 +1,4 @@
-package net.kaelos.icre.block;
+package net.kaelos.icre.block.ore;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
