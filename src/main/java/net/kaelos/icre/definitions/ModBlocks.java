@@ -49,16 +49,22 @@ public class ModBlocks {
     public static final DeferredBlock<RubberPlanksBlock> RUBBER_PLANKS = registerBlock("rubber_planks", RubberPlanksBlock::new);
 
     // ==================== Cables ====================
-    public static final DeferredBlock<CableBlock> TIN_CABLE = registerBlock("tin_cable", prop ->
-            new CableBlock(prop, VoltageTier.LV, false, 2));
-    public static final DeferredBlock<CableBlock> COPPER_CABLE = registerBlock("copper_cable", prop ->
-            new CableBlock(prop, VoltageTier.MV, false, 2));
-    public static final DeferredBlock<CableBlock> GOLD_CABLE = registerBlock("gold_cable", prop ->
-            new CableBlock(prop, VoltageTier.HV, false, 2));
-    public static final DeferredBlock<CableBlock> IRON_CABLE = registerBlock("iron_cable", prop ->
-            new CableBlock(prop, VoltageTier.EV, false, 2));
-    public static final DeferredBlock<CableBlock> GLASS_FIBRE_CABLE = registerBlock("glass_fibre_cable", prop ->
-            new CableBlock(prop, VoltageTier.IV, true, 2));
+    public static final DeferredBlock<CableBlock> TIN_CABLE = registerCable("tin_cable", VoltageTier.LV, false, 2);
+    public static final DeferredBlock<CableBlock> TIN_CABLE_1X = registerCable("tin_cable_1x", VoltageTier.LV, true, 3);
+
+    public static final DeferredBlock<CableBlock> COPPER_CABLE = registerCable("copper_cable", VoltageTier.MV, false, 2);
+    public static final DeferredBlock<CableBlock> COPPER_CABLE_1X = registerCable("copper_cable_1x", VoltageTier.MV, true, 3);
+
+    public static final DeferredBlock<CableBlock> GOLD_CABLE = registerCable("gold_cable", VoltageTier.HV, false, 2);
+    public static final DeferredBlock<CableBlock> GOLD_CABLE_1X = registerCable("gold_cable_1x", VoltageTier.HV, true, 3);
+    public static final DeferredBlock<CableBlock> GOLD_CABLE_2X = registerCable("gold_cable_2x", VoltageTier.HV, true, 4);
+
+    public static final DeferredBlock<CableBlock> IRON_CABLE = registerCable("iron_cable", VoltageTier.EV, false, 2);
+    public static final DeferredBlock<CableBlock> IRON_CABLE_1X = registerCable("iron_cable_1x", VoltageTier.EV, true, 3);
+    public static final DeferredBlock<CableBlock> IRON_CABLE_2X = registerCable("iron_cable_2x", VoltageTier.EV, true, 4);
+    public static final DeferredBlock<CableBlock> IRON_CABLE_4X = registerCable("iron_cable_4x", VoltageTier.EV, true, 6);
+
+    public static final DeferredBlock<CableBlock> GLASS_FIBRE_CABLE = registerCable("glass_fibre_cable", VoltageTier.IV, true, 2);
 
     // ==================== Machine Casings ====================
     public static final DeferredBlock<Block> BASIC_MACHINE_CASING = registerBlock("basic_machine_casing", prop ->
@@ -83,6 +89,10 @@ public class ModBlocks {
                 .map(Holder::value)
                 .filter(type::isInstance)
                 .toList();
+    }
+
+    private static DeferredBlock<CableBlock> registerCable(String name, VoltageTier tier, boolean insulated, int radius) {
+        return registerBlock(name, prop -> new CableBlock(prop, tier, insulated, radius));
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> factory) {

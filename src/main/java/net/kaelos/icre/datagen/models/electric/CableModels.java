@@ -16,6 +16,7 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.client.model.generators.template.ExtendedModelTemplateBuilder;
 
@@ -36,14 +37,14 @@ public class CableModels {
     private CableModels() {}
 
     public static void register(BlockModelGenerators blockModels) {
-        registerCable(blockModels, ModBlocks.TIN_CABLE.get(), 2);
-        registerCable(blockModels, ModBlocks.COPPER_CABLE.get(), 2);
-        registerCable(blockModels, ModBlocks.GOLD_CABLE.get(), 2);
-        registerCable(blockModels, ModBlocks.IRON_CABLE.get(), 2);
-        registerCable(blockModels, ModBlocks.GLASS_FIBRE_CABLE.get(), 2);
+        for (Block block : ModBlocks.getBlocks(CableBlock.class)) {
+            if (block instanceof CableBlock cable) {
+                registerCable(blockModels, cable);
+            }
+        }
     }
 
-    private static void registerCable(BlockModelGenerators blockModels, CableBlock cable, int radius) {
+    private static void registerCable(BlockModelGenerators blockModels, CableBlock cable) {
         String name = BuiltInRegistries.BLOCK.getKey(cable).getPath();
 
         Material blockMaterial = new Material(ICRE.makeId("block/cable/" + name));
@@ -53,7 +54,7 @@ public class CableModels {
                 .put(TextureSlot.ALL, blockMaterial)
                 .put(TextureSlot.PARTICLE, blockMaterial);
 
-        CableTemplates templates = TEMPLATES_BY_RADIUS.computeIfAbsent(radius, CableModels::createTemplates);
+        CableTemplates templates = TEMPLATES_BY_RADIUS.computeIfAbsent(cable.getRadius(), CableModels::createTemplates);
 
         MultiVariant centerVariant = BlockModelGenerators.plainVariant(
                 templates.center().createWithSuffix(cable, "_center", mapping, blockModels.modelOutput)

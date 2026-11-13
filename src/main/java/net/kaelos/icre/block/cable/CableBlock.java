@@ -35,6 +35,7 @@ public class CableBlock extends Block implements EntityBlock {
 
     private final VoltageTier tier;
     private final boolean insulated;
+    private final int radius;
 
     private final VoxelShape shapeCenter;
     private final Map<Direction, VoxelShape> armShapes = new EnumMap<>(Direction.class);
@@ -43,6 +44,7 @@ public class CableBlock extends Block implements EntityBlock {
         super(properties);
         this.tier = tier;
         this.insulated = insulated;
+        this.radius = radius;
 
         BlockState defaultState = this.getStateDefinition().any();
         for (BooleanProperty property : PROPERTY_BY_DIRECTION.values()) {
@@ -66,8 +68,8 @@ public class CableBlock extends Block implements EntityBlock {
         return this.tier;
     }
 
-    public boolean isInsulated() {
-        return this.insulated;
+    public int getRadius() {
+        return radius;
     }
 
     @Override
