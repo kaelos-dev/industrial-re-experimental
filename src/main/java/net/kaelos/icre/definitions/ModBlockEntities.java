@@ -3,7 +3,10 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.entity.block.electric.CableBlockEntity;
 import net.kaelos.icre.entity.block.machine.generating.GeneratorBlockEntity;
+import net.kaelos.icre.entity.block.machine.producing.CompressorBlockEntity;
+import net.kaelos.icre.entity.block.machine.producing.ElectricFurnaceBlockEntity;
 import net.kaelos.icre.entity.block.machine.producing.MaceratorBlockEntity;
+import net.kaelos.icre.entity.block.machine.producing.MetalFormerBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +31,12 @@ public class ModBlockEntities {
     // ==================== Machines ====================
     public static final Supplier<BlockEntityType<MaceratorBlockEntity>> MACERATOR_BE = BLOCK_ENTITIES.register("macerator", () ->
             new BlockEntityType<>(MaceratorBlockEntity::new, ModBlocks.MACERATOR.get()));
+    public static final Supplier<BlockEntityType<MetalFormerBlockEntity>> METAL_FORMER_BE = BLOCK_ENTITIES.register("metal_former", () ->
+            new BlockEntityType<>(MetalFormerBlockEntity::new, ModBlocks.METAL_FORMER.get()));
+    public static final Supplier<BlockEntityType<ElectricFurnaceBlockEntity>> ELECTRIC_FURNACE_BE = BLOCK_ENTITIES.register("electric_furnace", () ->
+            new BlockEntityType<>(ElectricFurnaceBlockEntity::new, ModBlocks.ELECTRIC_FURNACE.get()));
+    public static final Supplier<BlockEntityType<CompressorBlockEntity>> COMPRESSOR_BE = BLOCK_ENTITIES.register("compressor", () ->
+            new BlockEntityType<>(CompressorBlockEntity::new, ModBlocks.COMPRESSOR.get()));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

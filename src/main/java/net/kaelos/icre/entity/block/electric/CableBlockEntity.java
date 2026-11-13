@@ -139,7 +139,7 @@ public class CableBlockEntity extends BlockEntity implements IEuHandlerProvider 
         while (remaining > 0 && !activeReceivers.isEmpty()) {
             int count = activeReceivers.size();
             long baseShare = remaining / count;
-            long extra = remaining & count;
+            long extra = remaining % count;
             List<IEuStorage> nextRound = new ArrayList<>();
 
             for (int i = 0; i < count; i++) {

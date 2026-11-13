@@ -2,6 +2,7 @@ package net.kaelos.icre.datagen.models.electric;
 
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.block.base.BaseEntityMachineBlock;
+import net.kaelos.icre.datagen.models.ModelHelpers;
 import net.kaelos.icre.definitions.ModBlocks;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -25,6 +26,8 @@ public class MachineModels {
     private MachineModels() {}
 
     public static void register(BlockModelGenerators blockModels) {
+        ModelHelpers.cubeBlock(blockModels, ModBlocks.BASIC_MACHINE_CASING.get(), "machine/basic_machine_casing");
+
         registerMachine(blockModels, ModBlocks.GENERATOR.get(), faces -> faces
                 .front(tex("generator/generator_front"), tex("generator/generator_front_on"))
                 .side(tex("generator/generator_side"), tex("generator/generator_side_on"))
@@ -38,6 +41,24 @@ public class MachineModels {
                 .top(tex("producing/macerator/macerator_top"), tex("producing/macerator/macerator_top_on"))
                 .bottom(tex("producing/macerator/macerator_bottom"))
         );
+
+        registerMachine(blockModels, ModBlocks.METAL_FORMER.get(), faces -> faces
+                .front(tex("producing/metalformer/metal_former_front"), tex("producing/metalformer/metal_former_front_on"))
+                .side(tex("producing/metalformer/metal_former_side"))
+                .top(tex("producing/metalformer/metal_former_top"), tex("producing/metalformer/metal_former_top_on"))
+                .bottom(tex("producing/metalformer/metal_former_bottom")));
+
+        registerMachine(blockModels, ModBlocks.ELECTRIC_FURNACE.get(), faces -> faces
+                .front(tex("producing/electricfurnace/electric_furnace_front"), tex("producing/electricfurnace/electric_furnace_front_on"))
+                .side(tex("producing/electricfurnace/electric_furnace_side"))
+                .top(tex("producing/electricfurnace/electric_furnace_top"))
+                .bottom(tex("producing/electricfurnace/electric_furnace_bottom")));
+
+        registerMachine(blockModels, ModBlocks.COMPRESSOR.get(), faces -> faces
+                .front(tex("producing/compressor/compressor_front"), tex("producing/compressor/compressor_front_on"))
+                .side(tex("producing/compressor/compressor_side"))
+                .top(tex("producing/compressor/compressor_top"))
+                .bottom(tex("producing/compressor/compressor_bottom")));
     }
 
     private static void registerMachine(

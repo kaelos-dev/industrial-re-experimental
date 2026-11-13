@@ -1,7 +1,9 @@
 package net.kaelos.icre.definitions;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.recipe.CompressorRecipe;
 import net.kaelos.icre.recipe.MaceratorRecipe;
+import net.kaelos.icre.recipe.metalformer.MetalFormerRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -26,6 +28,28 @@ public class ModRecipes {
             });
     public static final Supplier<RecipeSerializer<MaceratorRecipe>> MACERATOR_SERIALIZER = SERIALIZERS.register("macerating", () ->
             new RecipeSerializer<>(MaceratorRecipe.CODEC, MaceratorRecipe.STREAM_CODEC));
+
+    // ==================== Compressor ====================
+    public static final Supplier<RecipeType<CompressorRecipe>> COMPRESSOR = TYPES.register("compressing", () ->
+            new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return ICRE.MOD_ID + ":compressing";
+                }
+            });
+    public static final Supplier<RecipeSerializer<CompressorRecipe>> COMPRESSOR_SERIALIZER = SERIALIZERS.register("compressing", () ->
+            new RecipeSerializer<>(CompressorRecipe.CODEC, CompressorRecipe.STREAM_CODEC));
+
+    // ==================== Metal Former ====================
+    public static final Supplier<RecipeType<MetalFormerRecipe>> METAL_FORMER = TYPES.register("metal_forming", () ->
+            new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return ICRE.MOD_ID + ":metal_forming";
+                }
+            });
+    public static final Supplier<RecipeSerializer<MetalFormerRecipe>> METAL_FORMER_SERIALIZER = SERIALIZERS.register("metal_forming", () ->
+            new RecipeSerializer<>(MetalFormerRecipe.CODEC, MetalFormerRecipe.STREAM_CODEC));
 
     public static void register(IEventBus eventBus) {
         TYPES.register(eventBus);

@@ -11,12 +11,12 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 
-public class ProcessingMachineMenu extends BaseContainerMenu<AbstractProcessingMachineBlockEntity<?>> {
+public class ProcessingMachineMenu extends BaseContainerMenu<AbstractProcessingMachineBlockEntity<?, ?>> {
     public ProcessingMachineMenu(MenuType<?> menuType, int containerId, Inventory playerInv, FriendlyByteBuf extraData) {
         this(menuType, containerId, playerInv, getBlockEntityFromBuf(playerInv, extraData), new SimpleContainerData(4));
     }
 
-    public ProcessingMachineMenu(MenuType<?> menuType, int containerId, Inventory playerInv, AbstractProcessingMachineBlockEntity<?> blockEntity, ContainerData data) {
+    public ProcessingMachineMenu(MenuType<?> menuType, int containerId, Inventory playerInv, AbstractProcessingMachineBlockEntity<?, ?> blockEntity, ContainerData data) {
         super(menuType, containerId, playerInv, blockEntity, data);
     }
 

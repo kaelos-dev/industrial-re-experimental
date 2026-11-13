@@ -99,6 +99,7 @@ public class ModLanguageProvider extends LanguageProvider {
 
         // Tools
         add(ModItems.TREETAP.get(), "Treetap", "Краник", "Краник");
+        add(ModItems.WRENCH.get(), "Wrench", "Гаечный ключ", "Гайковий ключ");
 
         // Tooltips
         add("tooltip." + ICRE.MOD_ID + ".durability", pick("Durability: ", "Прочность: ", "Міцність: "));

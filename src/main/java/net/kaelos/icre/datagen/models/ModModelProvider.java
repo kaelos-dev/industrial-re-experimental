@@ -48,6 +48,16 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.IRON_CASING, ModItems.LEAD_CASING, ModItems.STEEL_CASING,
                 ModItems.TIN_CASING);
 
+        ModelHelpers.flatItems(itemModels, "dust",
+                ModItems.BRONZE_DUST, ModItems.COPPER_DUST, ModItems.GOLD_DUST,
+                ModItems.IRON_DUST, ModItems.LAPIS_LAZULI_DUST, ModItems.LEAD_DUST,
+                ModItems.SILVER_DUST, ModItems.TIN_DUST, ModItems.HYDRATED_TIN_DUST,
+                ModItems.DIAMOND_DUST, ModItems.COAL_DUST, ModItems.HYDRATED_COAL_DUST,
+                ModItems.OBSIDIAN_DUST, ModItems.ENERGIUM_DUST, ModItems.CLAY_DUST,
+                ModItems.LITHIUM_DUST, ModItems.SILICON_DIOXIDE_DUST, ModItems.SULFUR_DUST,
+                ModItems.NETHERRACK_DUST, ModItems.ENDER_PEARL_DUST, ModItems.ENDER_EYE_DUST,
+                ModItems.EMERALD_DUST, ModItems.MILK_POWDER);
+
         ModelHelpers.flatItems(itemModels, "raw",
                 ModItems.RAW_LEAD, ModItems.RAW_TIN, ModItems.RAW_URANIUM);
 
@@ -63,14 +73,6 @@ public class ModModelProvider extends ModelProvider {
 
     private static void registerTools(ItemModelGenerators itemModels) {
         ModelHelpers.flatHandheldItems(itemModels, "tool",
-                ModItems.TREETAP, ModItems.FORGE_HAMMER, ModItems.CUTTER);
+                ModItems.TREETAP, ModItems.WRENCH, ModItems.FORGE_HAMMER, ModItems.CUTTER);
     }
-
-//    private static void registerCables(BlockModelGenerators blockModels) {
-//        ModelHelpers.cableBlocks(blockModels, ModBlocks.TIN_CABLE.get(), 2);
-//        ModelHelpers.cableBlocks(blockModels, ModBlocks.COPPER_CABLE.get(), 2);
-//        ModelHelpers.cableBlocks(blockModels, ModBlocks.GOLD_CABLE.get(), 2);
-//        ModelHelpers.cableBlocks(blockModels, ModBlocks.IRON_CABLE.get(), 2);
-//        ModelHelpers.cableBlocks(blockModels, ModBlocks.GLASS_FIBRE_CABLE.get(), 2);
-//    }
 }

@@ -1,15 +1,23 @@
 package net.kaelos.icre.datagen.tags;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.block.ore.OreBlock;
+import net.kaelos.icre.definitions.ModBlocks;
 import net.kaelos.icre.definitions.ModItems;
+import net.kaelos.icre.definitions.ModItems.ItemGroup;
 import net.kaelos.icre.util.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
     public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags) {
@@ -18,42 +26,51 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
-        tag(ModTags.Items.INGOT_ITEMS)
-                .add(ModItems.BRONZE_INGOT.get())
-                .add(ModItems.LEAD_INGOT.get())
-                .add(ModItems.SILVER_INGOT.get())
-                .add(ModItems.STEEL_INGOT.get())
-                .add(ModItems.TIN_INGOT.get());
+        addMaterialTags();
+        addToolTags();
+        addBlockItemTags();
+    }
 
-        tag(ModTags.Items.PLATE_ITEMS)
-                .add(ModItems.BRONZE_PLATE.get())
-                .add(ModItems.COPPER_PLATE.get())
-                .add(ModItems.GOLD_PLATE.get())
-                .add(ModItems.IRON_PLATE.get())
-                .add(ModItems.LAPIS_LAZULI_PLATE.get())
-                .add(ModItems.LEAD_PLATE.get())
-                .add(ModItems.OBSIDIAN_PLATE.get())
-                .add(ModItems.STEEL_PLATE.get())
-                .add(ModItems.TIN_PLATE.get());
+    private void addMaterialTags() {
+        addGroup(ItemGroup.INGOT, ModTags.Items.INGOT_ITEMS, Tags.Items.INGOTS);
+        addGroup(ItemGroup.PLATE, ModTags.Items.PLATE_ITEMS);
+        addGroup(ItemGroup.DENSE_PLATE, ModTags.Items.DENSE_PLATE_ITEMS);
+        addGroup(ItemGroup.CASING, ModTags.Items.CASING_ITEMS);
+        addGroup(ItemGroup.DUST, ModTags.Items.DUST_ITEMS, Tags.Items.DUSTS);
+        addGroup(ItemGroup.RAW, ModTags.Items.RAW_MATERIAL_ITEMS, Tags.Items.RAW_MATERIALS);
+    }
 
-        tag(ModTags.Items.DENSE_PLATE_ITEMS)
-                .add(ModItems.DENSE_BRONZE_PLATE.get())
-                .add(ModItems.DENSE_COPPER_PLATE.get())
-                .add(ModItems.DENSE_GOLD_PLATE.get())
-                .add(ModItems.DENSE_IRON_PLATE.get())
-                .add(ModItems.DENSE_LAPIS_LAZULI_PLATE.get())
-                .add(ModItems.DENSE_LEAD_PLATE.get())
-                .add(ModItems.DENSE_OBSIDIAN_PLATE.get())
-                .add(ModItems.DENSE_STEEL_PLATE.get())
-                .add(ModItems.DENSE_TIN_PLATE.get());
+    private void addToolTags() {
+        addGroup(ItemGroup.TOOL, ModTags.Items.TOOL_ITEMS, Tags.Items.TOOLS);
+        addAll(Tags.Items.TOOLS_WRENCH, ModItems.WRENCH);
+    }
 
-        tag(ModTags.Items.CASING_ITEMS)
-                .add(ModItems.BRONZE_CASING.get())
-                .add(ModItems.COPPER_CASING.get())
-                .add(ModItems.GOLD_CASING.get())
-                .add(ModItems.IRON_CASING.get())
-                .add(ModItems.LEAD_CASING.get())
-                .add(ModItems.STEEL_CASING.get())
-                .add(ModItems.TIN_CASING.get());
+    private void addBlockItemTags() {
+        tag(ItemTags.PLANKS).add(ModBlocks.RUBBER_PLANKS.asItem());
+        tag(ItemTags.SAPLINGS).add(ModBlocks.RUBBER_SAPLING.asItem());
+        tag(ItemTags.LEAVES).add(ModBlocks.RUBBER_LEAVES.asItem());
+        tag(ItemTags.LOGS_THAT_BURN).add(
+                ModBlocks.RUBBER_LOG.asItem(),
+                ModBlocks.STRIPPED_RUBBER_LOG.asItem(),
+                ModBlocks.RUBBER_WOOD.asItem(),
+                ModBlocks.STRIPPED_RUBBER_WOOD.asItem()
+        );
+        tag(Tags.Items.ORES).addAll(ModBlocks.getBlocks(OreBlock.class).stream().map(Block::asItem).toList());
+    }
+
+    @SafeVarargs
+    private void addGroup(ItemGroup group, TagKey<Item>... tags) {
+        var items = ModItems.getGroup(group);
+        for (TagKey<Item> tagKey : tags) {
+            tag(tagKey).addAll(items);
+        }
+    }
+
+    @SafeVarargs
+    private void addAll(TagKey<Item> tagKey, Supplier<? extends Item>... items) {
+        var builder = tag(tagKey);
+        for (Supplier<? extends Item> item : items) {
+            builder.add(item.get());
+        }
     }
 }

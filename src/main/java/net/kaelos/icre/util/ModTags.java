@@ -13,6 +13,9 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> ORE_BLOCKS = createTag("ore_blocks");
         public static final TagKey<Block> RUBBER_LOGS_BLOCKS = createTag("rubber_logs_blocks");
+        public static final TagKey<Block> MACHINES = createTag("machines");
+        public static final TagKey<Block> CABLES = createTag("cables");
+        public static final TagKey<Block> MINEABLE_WITH_WRENCH = createTag("mineable/wrench");
 
         private static TagKey<Block> createTag(String name) {
             return BlockTags.create(ICRE.makeId(name));
@@ -24,6 +27,9 @@ public class ModTags {
         public static final TagKey<Item> PLATE_ITEMS = createTag("plate_items");
         public static final TagKey<Item> DENSE_PLATE_ITEMS = createTag("dense_plate_items");
         public static final TagKey<Item> CASING_ITEMS = createTag("casing_items");
+        public static final TagKey<Item> DUST_ITEMS = createTag("dust_items");
+        public static final TagKey<Item> RAW_MATERIAL_ITEMS = createTag("raw_material_items");
+        public static final TagKey<Item> TOOL_ITEMS = createTag("tool_items");
 
         private static TagKey<Item> createTag(String name) {
             return ItemTags.create(ICRE.makeId(name));

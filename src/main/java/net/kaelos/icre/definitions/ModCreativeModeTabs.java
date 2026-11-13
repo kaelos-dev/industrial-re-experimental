@@ -1,6 +1,9 @@
 package net.kaelos.icre.definitions;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.block.base.BaseEntityMachineBlock;
+import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.ore.OreBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,49 +24,13 @@ public class ModCreativeModeTabs {
             "resources_tab",
             ModItems.BRONZE_INGOT,
             (parameters, output) -> {
-                output.accept(ModItems.BRONZE_INGOT.get());
-                output.accept(ModItems.LEAD_INGOT.get());
-                output.accept(ModItems.SILVER_INGOT.get());
-                output.accept(ModItems.STEEL_INGOT.get());
-                output.accept(ModItems.TIN_INGOT.get());
-
-                output.accept(ModItems.BRONZE_PLATE.get());
-                output.accept(ModItems.COPPER_PLATE.get());
-                output.accept(ModItems.GOLD_PLATE.get());
-                output.accept(ModItems.IRON_PLATE.get());
-                output.accept(ModItems.LAPIS_LAZULI_PLATE.get());
-                output.accept(ModItems.LEAD_PLATE.get());
-                output.accept(ModItems.OBSIDIAN_PLATE.get());
-                output.accept(ModItems.STEEL_PLATE.get());
-                output.accept(ModItems.TIN_PLATE.get());
-
-                output.accept(ModItems.DENSE_BRONZE_PLATE.get());
-                output.accept(ModItems.DENSE_COPPER_PLATE.get());
-                output.accept(ModItems.DENSE_GOLD_PLATE.get());
-                output.accept(ModItems.DENSE_IRON_PLATE.get());
-                output.accept(ModItems.DENSE_LAPIS_LAZULI_PLATE.get());
-                output.accept(ModItems.DENSE_LEAD_PLATE.get());
-                output.accept(ModItems.DENSE_OBSIDIAN_PLATE.get());
-                output.accept(ModItems.DENSE_STEEL_PLATE.get());
-                output.accept(ModItems.DENSE_TIN_PLATE.get());
-
-                output.accept(ModItems.BRONZE_CASING.get());
-                output.accept(ModItems.COPPER_CASING.get());
-                output.accept(ModItems.GOLD_CASING.get());
-                output.accept(ModItems.IRON_CASING.get());
-                output.accept(ModItems.LEAD_CASING.get());
-                output.accept(ModItems.STEEL_CASING.get());
-                output.accept(ModItems.TIN_CASING.get());
-
-                output.accept(ModBlocks.LEAD_ORE.get());
-                output.accept(ModBlocks.DEEPSLATE_LEAD_ORE.get());
-                output.accept(ModBlocks.TIN_ORE.get());
-                output.accept(ModBlocks.DEEPSLATE_TIN_ORE.get());
-                output.accept(ModBlocks.DEEPSLATE_URANIUM_ORE.get());
-
-                output.accept(ModItems.RAW_LEAD.get());
-                output.accept(ModItems.RAW_TIN.get());
-                output.accept(ModItems.RAW_URANIUM.get());
+                ModItems.getGroup(ModItems.ItemGroup.INGOT).forEach(output::accept);
+                ModItems.getGroup(ModItems.ItemGroup.PLATE).forEach(output::accept);
+                ModItems.getGroup(ModItems.ItemGroup.DENSE_PLATE).forEach(output::accept);
+                ModItems.getGroup(ModItems.ItemGroup.CASING).forEach(output::accept);
+                ModItems.getGroup(ModItems.ItemGroup.DUST).forEach(output::accept);
+                ModBlocks.getBlocks(OreBlock.class).forEach(output::accept);
+                ModItems.getGroup(ModItems.ItemGroup.RAW).forEach(output::accept);
 
                 output.accept(ModItems.LATEX.get());
                 output.accept(ModItems.RUBBER.get());
@@ -90,11 +57,8 @@ public class ModCreativeModeTabs {
             "components_tab",
             ModBlocks.TIN_CABLE,
             (parameters, output) -> {
-                output.accept(ModBlocks.TIN_CABLE.get());
-                output.accept(ModBlocks.COPPER_CABLE.get());
-                output.accept(ModBlocks.GOLD_CABLE.get());
-                output.accept(ModBlocks.IRON_CABLE.get());
-                output.accept(ModBlocks.GLASS_FIBRE_CABLE.get());
+                ModBlocks.getBlocks(CableBlock.class).forEach(output::accept);
+                output.accept(ModBlocks.BASIC_MACHINE_CASING.get());
             }
     );
 
@@ -102,21 +66,14 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MACHINES_TAB = registerTab(
             "machines_tab",
             ModBlocks.MACERATOR,
-            (parameters, output) -> {
-                output.accept(ModBlocks.GENERATOR.get());
-                output.accept(ModBlocks.MACERATOR.get());
-            }
+            (parameters, output) -> ModBlocks.getBlocks(BaseEntityMachineBlock.class).forEach(output::accept)
     );
 
     // ==================== Tools Tab ====================
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = registerTab(
             "tools_tab",
             ModItems.TREETAP,
-            (parameters, output) -> {
-                output.accept(ModItems.TREETAP.get());
-                output.accept(ModItems.FORGE_HAMMER.get());
-                output.accept(ModItems.CUTTER.get());
-            }
+            (parameters, output) -> ModItems.getGroup(ModItems.ItemGroup.TOOL).forEach(output::accept)
     );
 
     private static DeferredHolder<CreativeModeTab, CreativeModeTab> registerTab(String name, Supplier<? extends ItemLike> icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
