@@ -18,7 +18,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
-public abstract class AbstractProcessingMachineBlockEntity<R extends Recipe<SingleRecipeInput>> extends ElectricBlockEntity implements ITickableBlockEntity {
+public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput, R extends Recipe<I>> extends ElectricBlockEntity implements ITickableBlockEntity {
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_OUTPUT = 1;
 
@@ -28,7 +28,9 @@ public abstract class AbstractProcessingMachineBlockEntity<R extends Recipe<Sing
     protected final int maxProgress;
     protected final int energyPerTick;
 
-    private final RecipeManager.CachedCheck<SingleRecipeInput, R> quickCheck;
+    private final RecipeManager.CachedCheck<I, R> quickCheck;
+
+    protected abstract I createRecipeInput(ItemStack inputStack);
 
     public final ContainerData dataAccess = new ContainerData() {
         @Override
@@ -70,7 +72,7 @@ public abstract class AbstractProcessingMachineBlockEntity<R extends Recipe<Sing
         ItemStack inputStack = getStack(SLOT_INPUT);
 
         if (!inputStack.isEmpty()) {
-            SingleRecipeInput recipeInput = new SingleRecipeInput(inputStack);
+            I recipeInput = createRecipeInput(inputStack);
             Optional<RecipeHolder<R>> recipe = this.quickCheck.getRecipeFor(recipeInput, level);
 
             if (recipe.isPresent()) {
