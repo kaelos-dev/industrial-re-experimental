@@ -131,6 +131,8 @@ public class ModLanguageProvider extends LanguageProvider {
         // Components
         add(ModItems.LATEX.get(), "Latex", "Каучук", "Каучук");
         add(ModItems.RUBBER.get(), "Rubber", "Резина", "Гума");
+        add(ModItems.COIL.get(), "Coil", "Катушка", "Котушка");
+        add(ModItems.ELECTRONIC_CIRCUIT.get(), "Electronic Circuit", "Электросхема", "Електросхема");
         add(ModItems.RE_BATTERY.get(), "RE-Battery", "Аккумулятор", "Акумулятор");
 
         // Tools

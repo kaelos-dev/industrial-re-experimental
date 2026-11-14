@@ -18,10 +18,15 @@ sourceSets.main.resources {
     exclude("src/generated/**/.cache")
 }
 
-repositories {}
+repositories {
+    maven {
+        name = "Jared's Maven"
+        url = "https://maven.blamejared.com/"
+    }
+}
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_id}-neoforge-${minecraft_version}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
@@ -67,7 +72,12 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
-dependencies {}
+dependencies {
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+}
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
