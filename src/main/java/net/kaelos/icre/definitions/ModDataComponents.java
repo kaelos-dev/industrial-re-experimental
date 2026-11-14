@@ -19,6 +19,12 @@ public class ModDataComponents {
                     .networkSynchronized(ByteBufCodecs.VAR_LONG)
                     .cacheEncoding());
 
+    public static DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> SILK_TOUCH =
+            DATA_COMPONENTS.registerComponentType("silk_touch", builder -> builder
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .cacheEncoding());
+
     private ModDataComponents() {}
 
     public static void register(IEventBus eventBus) {

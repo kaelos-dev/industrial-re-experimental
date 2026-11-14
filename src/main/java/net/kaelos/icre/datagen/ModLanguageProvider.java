@@ -141,6 +141,15 @@ public class ModLanguageProvider extends LanguageProvider {
         add(ModItems.FORGE_HAMMER.get(), "Forge Hammer", "Кузнечный молот", "Ковальський молот");
         add(ModItems.CUTTER.get(), "Cutter", "Кусачки", "Кусачки");
 
+        // Electric Tools
+        add(ModItems.MINING_DRILL.get(), "Mining Drill", "Шахтёрский бур", "Шахтарський бур");
+        add(ModItems.DIAMOND_DRILL.get(), "Diamond Drill", "Алмазный бур", "Діамантовий бур");
+        add(ModItems.IRIDIUM_DRILL.get(), "Iridium Drill", "Иридиевый бур", "Іридієвий бур");
+        add(ModItems.CHAINSAW.get(), "Chainsaw", "Электропила", "Електропила");
+        add(ModItems.ELECTRIC_TREETAP.get(), "Electric Treetap", "Электрокраник", "Електрокраник");
+        add(ModItems.ELECTRIC_WRENCH.get(), "Electric Wrench", "Электроключ", "Електроключ");
+        add(ModItems.ELECTRIC_HOE.get(), "Electric Hoe", "Электромотыга", "Електромотика");
+
         // Cables
         add(ModBlocks.TIN_CABLE.get(), "Tin Cable", "Оловянный кабель", "Олов'яний кабель");
         add(ModBlocks.TIN_CABLE_1X.get(), "Insulated Tin Cable", "Изолированный оловянный кабель", "Ізольований олов'яний кабель");

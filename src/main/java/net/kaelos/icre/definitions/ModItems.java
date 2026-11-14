@@ -7,6 +7,8 @@ import net.kaelos.icre.item.energy.BatteryItem;
 import net.kaelos.icre.item.tool.CraftingTool;
 import net.kaelos.icre.item.tool.TreeTapTool;
 import net.kaelos.icre.item.tool.WrenchTool;
+import net.kaelos.icre.item.tool.electric.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -116,6 +118,21 @@ public class ModItems {
     public static final DeferredItem<WrenchTool> WRENCH = registerItem("wrench", WrenchTool::new, ItemGroup.TOOL);
     public static final DeferredItem<Item> FORGE_HAMMER = registerItem("forge_hammer", prop -> new CraftingTool(prop, 80), ItemGroup.TOOL);
     public static final DeferredItem<Item> CUTTER = registerItem("cutter", prop -> new CraftingTool(prop, 60), ItemGroup.TOOL);
+
+    // ==================== Electric Tools ====================
+    public static final DeferredItem<MiningDrillTool> MINING_DRILL = registerItem("mining_drill", prop ->
+            new MiningDrillTool(prop, 30_000L, 100L, VoltageTier.LV, 50L, 8.0F, BlockTags.INCORRECT_FOR_IRON_TOOL,
+                    false), ItemGroup.TOOL);
+    public static final DeferredItem<MiningDrillTool> DIAMOND_DRILL = registerItem("diamond_drill", prop ->
+            new MiningDrillTool(prop, 30_000L, 100L, VoltageTier.LV, 80L, 16.0F, BlockTags.INCORRECT_FOR_DIAMOND_TOOL,
+                    false), ItemGroup.TOOL);
+    public static final DeferredItem<MiningDrillTool> IRIDIUM_DRILL = registerItem("iridium_drill", prop ->
+            new MiningDrillTool(prop, 300_000L, 512L, VoltageTier.MV, 800L, 24.0F, BlockTags.INCORRECT_FOR_NETHERITE_TOOL,
+                    true), ItemGroup.TOOL);
+    public static final DeferredItem<ChainsawTool> CHAINSAW = registerItem("chainsaw", ChainsawTool::new, ItemGroup.TOOL);
+    public static final DeferredItem<ElectricTreetapTool> ELECTRIC_TREETAP = registerItem("electric_treetap", ElectricTreetapTool::new, ItemGroup.TOOL);
+    public static final DeferredItem<ElectricWrenchTool> ELECTRIC_WRENCH = registerItem("electric_wrench", ElectricWrenchTool::new, ItemGroup.TOOL);
+    public static final DeferredItem<ElectricHoeTool> ELECTRIC_HOE = registerItem("electric_hoe", ElectricHoeTool::new, ItemGroup.TOOL);
 
     public static List<Item> getGroup(ItemGroup group) {
         return GROUPS.getOrDefault(group, List.of()).stream()

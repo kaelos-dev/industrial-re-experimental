@@ -42,7 +42,20 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     private void addToolTags() {
         addGroup(ItemGroup.TOOL, ModTags.Items.TOOL_ITEMS, Tags.Items.TOOLS);
-        addAll(Tags.Items.TOOLS_WRENCH, ModItems.WRENCH);
+        addAll(Tags.Items.TOOLS_WRENCH, ModItems.WRENCH, ModItems.ELECTRIC_WRENCH);
+        addAll(Tags.Items.TOOLS_SHEAR, ModItems.CHAINSAW);
+
+        addAll(ItemTags.PICKAXES, ModItems.MINING_DRILL, ModItems.DIAMOND_DRILL, ModItems.IRIDIUM_DRILL);
+        addAll(ItemTags.SHOVELS, ModItems.MINING_DRILL, ModItems.DIAMOND_DRILL, ModItems.IRIDIUM_DRILL);
+        addAll(ItemTags.AXES, ModItems.CHAINSAW);
+        addAll(ItemTags.HOES, ModItems.ELECTRIC_HOE);
+
+        addAll(ItemTags.MINING_ENCHANTABLE,
+                ModItems.MINING_DRILL, ModItems.DIAMOND_DRILL, ModItems.IRIDIUM_DRILL,
+                ModItems.CHAINSAW, ModItems.ELECTRIC_HOE);
+        addAll(ItemTags.MINING_LOOT_ENCHANTABLE,
+                ModItems.MINING_DRILL, ModItems.DIAMOND_DRILL, ModItems.IRIDIUM_DRILL,
+                ModItems.CHAINSAW, ModItems.ELECTRIC_HOE);
     }
 
     private void addBlockItemTags() {

@@ -5,9 +5,11 @@ import net.kaelos.icre.block.base.BaseEntityMachineBlock;
 import net.kaelos.icre.block.cable.CableBlock;
 import net.kaelos.icre.block.storage.StorageBlock;
 import net.kaelos.icre.block.ore.OreBlock;
+import net.kaelos.icre.item.energy.BaseEnergyItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
@@ -65,8 +67,12 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.COIL.get());
                 output.accept(ModItems.ELECTRONIC_CIRCUIT.get());
 
-                ModItems.getGroup(ModItems.ItemGroup.BATTERY).forEach(output::accept);
-                output.accept(ModItems.RE_BATTERY.get().createChargedStack());
+                for (Item battery : ModItems.getGroup(ModItems.ItemGroup.BATTERY)) {
+                    output.accept(battery);
+                    if (battery instanceof BaseEnergyItem energyItem) {
+                        output.accept(energyItem.createChargedStack());
+                    }
+                }
             }
     );
 
@@ -81,7 +87,14 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TOOLS_TAB = registerTab(
             "tools_tab",
             ModItems.TREETAP,
-            (parameters, output) -> ModItems.getGroup(ModItems.ItemGroup.TOOL).forEach(output::accept)
+            (parameters, output) -> {
+                for (Item tool : ModItems.getGroup(ModItems.ItemGroup.TOOL)) {
+                    output.accept(tool);
+                    if (tool instanceof BaseEnergyItem energyTool) {
+                        output.accept(energyTool.createChargedStack());
+                    }
+                }
+            }
     );
 
     private static DeferredHolder<CreativeModeTab, CreativeModeTab> registerTab(String name, Supplier<? extends ItemLike> icon, CreativeModeTab.DisplayItemsGenerator displayItems) {
