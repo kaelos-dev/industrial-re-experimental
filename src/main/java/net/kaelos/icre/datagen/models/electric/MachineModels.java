@@ -35,6 +35,13 @@ public class MachineModels {
                 .bottom(tex("generator/generator_bottom"))
         );
 
+//        registerMachine(blockModels, ModBlocks.IRON_FURNACE.get(), faces -> faces
+//                .front(tex("producing/ironfurnace/iron_furnace_front"), tex("producing/ironfurnace/iron_furnace_front_on"))
+//                .side(tex("producing/ironfurnace/iron_furnace_side"))
+//                .top(tex("producing/ironfurnace/iron_furnace_top"))
+//                .bottom(tex("producing/ironfurnace/iron_furnace_bottom"))
+//        );
+
         registerMachine(blockModels, ModBlocks.MACERATOR.get(), faces -> faces
                 .front(tex("producing/macerator/macerator_front"), tex("producing/macerator/macerator_front_on"))
                 .side(tex("producing/macerator/macerator_side"))

@@ -4,6 +4,7 @@ import net.kaelos.icre.api.energy.VoltageTier;
 import net.kaelos.icre.block.base.BaseEntityMachineBlock;
 import net.kaelos.icre.entity.block.base.ElectricBlockEntity;
 import net.kaelos.icre.entity.block.base.ITickableBlockEntity;
+import net.kaelos.icre.recipe.ICountedRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.inventory.ContainerData;
@@ -76,14 +77,17 @@ public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput
             Optional<RecipeHolder<R>> recipe = this.quickCheck.getRecipeFor(recipeInput, level);
 
             if (recipe.isPresent()) {
-                ItemStack result = recipe.get().value().assemble(recipeInput);
-                if (!result.isEmpty() && canInsertIntoOutputSlot(result)) {
+                R matches = recipe.get().value();
+                int consumeCount = matches instanceof ICountedRecipe counted ? counted.inputCount() : 1;
+                ItemStack result = matches.assemble(recipeInput);
+
+                if (inputStack.getCount() >= consumeCount && !result.isEmpty() && canInsertIntoOutputSlot(result)) {
                     if (this.energyStorage.consumeEnergy(this.energyPerTick)) {
                         this.progress++;
                         dirty = true;
 
                         if (this.progress >= this.maxProgress) {
-                            craftItem(inputStack, result);
+                            craftItem(inputStack, result, consumeCount);
                             this.progress = 0;
                         }
                     }
@@ -130,8 +134,8 @@ public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput
         return outputStack.getCount() + result.getCount() <= maxAllowed;
     }
 
-    private void craftItem(ItemStack inputStack, ItemStack result) {
-        inputStack.shrink(1);
+    private void craftItem(ItemStack inputStack, ItemStack result, int consumeCount) {
+        inputStack.shrink(consumeCount);
         setStack(SLOT_INPUT, inputStack);
 
         ItemStack outputStack = getStack(SLOT_OUTPUT);
