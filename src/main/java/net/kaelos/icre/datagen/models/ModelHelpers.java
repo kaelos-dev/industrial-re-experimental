@@ -1,16 +1,20 @@
 package net.kaelos.icre.datagen.models;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.client.item.EnergyFillProperty;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModelHelpers {
@@ -21,6 +25,33 @@ public class ModelHelpers {
         TextureMapping mapping = TextureMapping.layer0(material);
         Identifier modelId = template.create(item, mapping, itemModels.modelOutput);
         itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelId));
+    }
+
+    public static void energyItem(ItemModelGenerators itemModels, Item item, String folder, float... stageThresholds) {
+        String name = BuiltInRegistries.ITEM.getKey(item).getPath();
+        String basePath = folder.isEmpty() ? name : folder + "/" + name;
+
+        Identifier emptyModelId = createFlatStageModel(itemModels, name + "_0", basePath + "_0");
+        List<RangeSelectItemModel.Entry> entries = new ArrayList<>(stageThresholds.length);
+        for (int i = 0; i < stageThresholds.length; i++) {
+            int stage = i + 1;
+            Identifier stageModelId = createFlatStageModel(itemModels, name + "_" + stage, basePath + "_" + stage);
+            entries.add(ItemModelUtils.override(ItemModelUtils.plainModel(stageModelId), stageThresholds[i]));
+        }
+
+        itemModels.itemModelOutput.accept(
+                item,
+                ItemModelUtils.rangeSelect(EnergyFillProperty.INSTANCE, ItemModelUtils.plainModel(emptyModelId), entries)
+        );
+    }
+
+    private static Identifier createFlatStageModel(ItemModelGenerators itemModels, String modelName, String texturePath) {
+        Material material = new Material(ICRE.makeId("item/" + texturePath));
+        return ModelTemplates.FLAT_ITEM.create(
+                ICRE.makeId("item/" + modelName),
+                TextureMapping.layer0(material),
+                itemModels.modelOutput
+        );
     }
 
     @SafeVarargs

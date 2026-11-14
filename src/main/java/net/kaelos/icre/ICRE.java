@@ -25,5 +25,6 @@ public class ICRE {
         ModBlockEntities.register(eventBus);
         ModRecipes.register(eventBus);
         ModMenuTypes.register(eventBus);
+        ModDataComponents.register(eventBus);
     }
 }

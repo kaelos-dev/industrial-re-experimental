@@ -61,6 +61,12 @@ public class ModCreativeModeTabs {
             (parameters, output) -> {
                 ModBlocks.getBlocks(CableBlock.class).forEach(output::accept);
                 output.accept(ModBlocks.BASIC_MACHINE_CASING.get());
+
+                output.accept(ModItems.COIL.get());
+                output.accept(ModItems.ELECTRONIC_CIRCUIT.get());
+
+                ModItems.getGroup(ModItems.ItemGroup.BATTERY).forEach(output::accept);
+                output.accept(ModItems.RE_BATTERY.get().createChargedStack());
             }
     );
 

@@ -1,7 +1,9 @@
 package net.kaelos.icre.definitions;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.api.energy.VoltageTier;
 import net.kaelos.icre.item.LatexItem;
+import net.kaelos.icre.item.energy.BatteryItem;
 import net.kaelos.icre.item.tool.CraftingTool;
 import net.kaelos.icre.item.tool.TreeTapTool;
 import net.kaelos.icre.item.tool.WrenchTool;
@@ -24,7 +26,8 @@ public class ModItems {
         CASING,
         DUST,
         RAW,
-        TOOL
+        TOOL,
+        BATTERY
     }
 
     public static final DeferredRegister.Items ITEMS =
@@ -103,6 +106,10 @@ public class ModItems {
     // ==================== Components ====================
     public static final DeferredItem<Item> LATEX = registerItem("latex", LatexItem::new);
     public static final DeferredItem<Item> RUBBER = registerItem("rubber", Item::new);
+    public static final DeferredItem<Item> COIL = registerItem("coil", Item::new);
+    public static final DeferredItem<Item> ELECTRONIC_CIRCUIT = registerItem("electronic_circuit", Item::new);
+    public static final DeferredItem<BatteryItem> RE_BATTERY = registerItem("re_battery", prop ->
+            new BatteryItem(prop, 10_000L, 100L, VoltageTier.LV), ItemGroup.BATTERY);
 
     // ==================== Tools ====================
     public static final DeferredItem<TreeTapTool> TREETAP = registerItem("treetap", TreeTapTool::new, ItemGroup.TOOL);

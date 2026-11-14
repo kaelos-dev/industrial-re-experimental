@@ -3,8 +3,11 @@ package net.kaelos.icre.event;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.api.energy.IEuHandlerProvider;
 import net.kaelos.icre.definitions.ModBlockEntities;
+import net.kaelos.icre.definitions.ModItems;
 import net.kaelos.icre.entity.block.base.IItemHandlerProvider;
 import net.kaelos.icre.init.ModCapabilities;
+import net.kaelos.icre.item.energy.BaseEnergyItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -32,6 +35,17 @@ public class ModCapabilityEvents {
                     type,
                     (be, side) -> be instanceof IItemHandlerProvider provider ? provider.getItemHandler(side) : null
             );
+        }
+
+        for (var entry : ModItems.ITEMS.getEntries()) {
+            Item item = entry.get();
+            if (item instanceof BaseEnergyItem energyItem) {
+                event.registerItem(
+                        ModCapabilities.EU_ITEM_CAPABILITY,
+                        (stack, access) -> energyItem.createEuStorage(access),
+                        item
+                );
+            }
         }
     }
 }

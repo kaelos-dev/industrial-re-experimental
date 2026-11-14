@@ -1,7 +1,9 @@
 package net.kaelos.icre.menu.machine.producing;
 
+import net.kaelos.icre.api.energy.EnergyUtils;
 import net.kaelos.icre.entity.block.machine.producing.AbstractProcessingMachineBlockEntity;
 import net.kaelos.icre.menu.base.BaseContainerMenu;
+import net.kaelos.icre.menu.slot.BatterySlot;
 import net.kaelos.icre.menu.slot.OutputSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,15 +27,23 @@ public class ProcessingMachineMenu extends BaseContainerMenu<AbstractProcessingM
         var inv = this.blockEntity.inventory;
         this.addSlot(new ResourceHandlerSlot(inv, inv::set, AbstractProcessingMachineBlockEntity.SLOT_INPUT, 47, 17));
         this.addSlot(new OutputSlot(playerInv.player, inv, AbstractProcessingMachineBlockEntity.SLOT_OUTPUT, 109, 35));
+        this.addSlot(new BatterySlot(inv, AbstractProcessingMachineBlockEntity.SLOT_BATTERY, 47, 53, BatterySlot.Mode.DISCHARGE));
     }
 
     @Override
     protected int getMachineSlotCount() {
-        return 2;
+        return 3;
     }
 
     @Override
     protected boolean moveToMachine(ItemStack stack, int teSlotCount) {
+        if (EnergyUtils.canDischarge(stack)) {
+            int batterySlot = machineSlot(AbstractProcessingMachineBlockEntity.SLOT_BATTERY);
+            if (this.moveItemStackTo(stack, batterySlot, batterySlot + 1, false)) {
+                return true;
+            }
+        }
+
         int inputSlot = machineSlot(AbstractProcessingMachineBlockEntity.SLOT_INPUT);
         return this.moveItemStackTo(stack, inputSlot, inputSlot + 1, false);
     }

@@ -1,13 +1,16 @@
 package net.kaelos.icre.menu.machine.generating;
 
+import net.kaelos.icre.api.energy.EnergyUtils;
 import net.kaelos.icre.definitions.ModMenuTypes;
 import net.kaelos.icre.entity.block.machine.generating.GeneratorBlockEntity;
 import net.kaelos.icre.menu.base.BaseContainerMenu;
+import net.kaelos.icre.menu.slot.BatterySlot;
 import net.kaelos.icre.menu.slot.FuelSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.item.ItemStack;
 
 public class GeneratorMenu extends BaseContainerMenu<GeneratorBlockEntity> {
     public GeneratorMenu(int containerId, Inventory playerInv, FriendlyByteBuf extraData) {
@@ -21,11 +24,25 @@ public class GeneratorMenu extends BaseContainerMenu<GeneratorBlockEntity> {
     @Override
     protected void addMachineSlots(Inventory playerInv) {
         this.addSlot(new FuelSlot(this.level, this.blockEntity.inventory, GeneratorBlockEntity.SLOT_FUEL, 53, 53));
+        this.addSlot(new BatterySlot(this.blockEntity.inventory, GeneratorBlockEntity.SLOT_CHARGE, 53, 17, BatterySlot.Mode.CHARGE));
     }
 
     @Override
     protected int getMachineSlotCount() {
-        return 1;
+        return 2;
+    }
+
+    @Override
+    protected boolean moveToMachine(ItemStack stack, int teSlotCount) {
+        if (EnergyUtils.canCharge(stack)) {
+            int chargeSlot = machineSlot(GeneratorBlockEntity.SLOT_CHARGE);
+            if (this.moveItemStackTo(stack, chargeSlot, chargeSlot + 1, false)) {
+                return true;
+            }
+        }
+
+        int fuelSlot = machineSlot(GeneratorBlockEntity.SLOT_FUEL);
+        return this.moveItemStackTo(stack, fuelSlot, fuelSlot + 1, false);
     }
 
     public int getEnergy() {

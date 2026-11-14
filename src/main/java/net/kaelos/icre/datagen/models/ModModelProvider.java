@@ -63,7 +63,10 @@ public class ModModelProvider extends ModelProvider {
                 ModItems.RAW_LEAD, ModItems.RAW_TIN, ModItems.RAW_URANIUM);
 
         ModelHelpers.flatItems(itemModels, "res",
-                ModItems.LATEX, ModItems.RUBBER);
+                ModItems.LATEX, ModItems.RUBBER, ModItems.COIL,
+                ModItems.ELECTRONIC_CIRCUIT);
+
+        ModelHelpers.energyItem(itemModels, ModItems.RE_BATTERY.get(), "battery", 0.0001F, 0.25F, 0.50F, 0.75F);
     }
 
     private static void registerOres(BlockModelGenerators blockModels) {

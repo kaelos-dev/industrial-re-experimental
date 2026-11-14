@@ -1,5 +1,6 @@
 package net.kaelos.icre.entity.block.machine.producing;
 
+import net.kaelos.icre.api.energy.EnergyUtils;
 import net.kaelos.icre.api.energy.VoltageTier;
 import net.kaelos.icre.block.base.BaseEntityMachineBlock;
 import net.kaelos.icre.entity.block.base.ElectricBlockEntity;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput, R extends Recipe<I>> extends ElectricBlockEntity implements ITickableBlockEntity {
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_OUTPUT = 1;
+    public static final int SLOT_BATTERY = 2;
 
     private static final String KEY_PROGRESS = "progress";
 
@@ -56,7 +58,7 @@ public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput
 
     protected AbstractProcessingMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state,
                                                    long energyCapacity, VoltageTier tier, int maxProgress, int energyPerTick, RecipeType<R> recipeType) {
-        super(type, pos, state, 2, energyCapacity, tier, true, false);
+        super(type, pos, state, 3, energyCapacity, tier, true, false);
         this.maxProgress = maxProgress;
         this.energyPerTick = energyPerTick;
         this.quickCheck = RecipeManager.createCheck(recipeType);
@@ -64,12 +66,20 @@ public abstract class AbstractProcessingMachineBlockEntity<I extends RecipeInput
 
     @Override
     protected boolean isItemValid(int slot, ItemResource resource) {
-        return slot != SLOT_OUTPUT && super.isItemValid(slot, resource);
+        if (slot == SLOT_OUTPUT) {
+            return false;
+        }
+
+        if (slot == SLOT_BATTERY) {
+            return EnergyUtils.canDischarge(resource, this.energyStorage.getTier());
+        }
+
+        return super.isItemValid(slot, resource);
     }
 
     @Override
     public void serverTick(ServerLevel level, BlockPos pos, BlockState state) {
-        boolean dirty = false;
+        boolean dirty = EnergyUtils.dischargeItemIntoStorage(this.energyStorage, this.inventory, SLOT_BATTERY);
         ItemStack inputStack = getStack(SLOT_INPUT);
 
         if (!inputStack.isEmpty()) {

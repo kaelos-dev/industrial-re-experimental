@@ -131,6 +131,7 @@ public class ModLanguageProvider extends LanguageProvider {
         // Components
         add(ModItems.LATEX.get(), "Latex", "Каучук", "Каучук");
         add(ModItems.RUBBER.get(), "Rubber", "Резина", "Гума");
+        add(ModItems.RE_BATTERY.get(), "RE-Battery", "Аккумулятор", "Акумулятор");
 
         // Tools
         add(ModItems.TREETAP.get(), "Treetap", "Краник", "Краник");
@@ -164,6 +165,7 @@ public class ModLanguageProvider extends LanguageProvider {
 
         // Tooltips
         add("tooltip." + ICRE.MOD_ID + ".durability", pick("Durability: ", "Прочность: ", "Міцність: "));
+        add("tooltip." + ICRE.MOD_ID + ".energy", pick("Energy: ", "Энергия: ", "Енергія: "));
 
         // GUIs
         add("gui." + ICRE.MOD_ID + ".metal_former.mode.rolling", "Rolling", "Прокатка", "Прокатка");

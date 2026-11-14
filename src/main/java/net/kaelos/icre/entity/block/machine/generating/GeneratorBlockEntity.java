@@ -20,11 +20,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class GeneratorBlockEntity extends ElectricBlockEntity implements ITickableBlockEntity {
     public static final int SLOT_FUEL = 0;
+    public static final int SLOT_CHARGE = 1;
     private static final int ENERGY_PER_TICK = 10;
 
     private static final String KEY_BURN_TIME = "burn_time";
@@ -55,7 +57,15 @@ public class GeneratorBlockEntity extends ElectricBlockEntity implements ITickab
     };
 
     public GeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.GENERATOR_BE.get(), pos, state, 1, 4000, VoltageTier.LV, false, true);
+        super(ModBlockEntities.GENERATOR_BE.get(), pos, state, 2, 4000, VoltageTier.LV, false, true);
+    }
+
+    @Override
+    protected boolean isItemValid(int slot, ItemResource resource) {
+        if (slot == SLOT_CHARGE) {
+            return EnergyUtils.canCharge(resource);
+        }
+        return super.isItemValid(slot, resource);
     }
 
     @Override
@@ -87,7 +97,13 @@ public class GeneratorBlockEntity extends ElectricBlockEntity implements ITickab
         }
 
         if (this.energyStorage.getEnergyStored() > 0) {
-            EnergyUtils.distributeEnergy(level, pos, this.energyStorage);
+            if (EnergyUtils.chargeItemFromStorage(this.energyStorage, this.inventory, SLOT_CHARGE)) {
+                dirty = true;
+            }
+
+            if (this.energyStorage.getEnergyStored() > 0) {
+                EnergyUtils.distributeEnergy(level, pos, this.energyStorage);
+            }
         }
 
         boolean working = this.burnTime > 0;
