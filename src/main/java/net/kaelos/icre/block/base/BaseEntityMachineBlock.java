@@ -1,6 +1,7 @@
 package net.kaelos.icre.block.base;
 
 import net.kaelos.icre.entity.block.base.ITickableBlockEntity;
+import net.kaelos.icre.item.tool.electric.BaseEnergyToolItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -113,17 +114,24 @@ public class BaseEntityMachineBlock<TE extends BlockEntity> extends Block implem
     }
 
     public InteractionResult tryWrenchRotate(BlockState state, Level level, BlockPos pos, @Nullable Player player, InteractionHand hand, ItemStack wrench) {
+        if (wrench.getItem() instanceof BaseEnergyToolItem energyTool && !energyTool.canUse(wrench, player)) {
+            return InteractionResult.FAIL;
+        }
+
         Direction current = state.getValue(FACING);
         Direction next = player != null && player.isShiftKeyDown()
                 ? current.getCounterClockWise()
                 : current.getClockWise();
 
         if (!level.isClientSide()) {
-            level.setBlockAndUpdate(pos, state.setValue(FACING, next));
-            level.playSound(null, pos, SoundEvents.ITEM_FRAME_ROTATE_ITEM, SoundSource.BLOCKS, 1.0F, 1.2F);
-            if (player != null) {
+            if (wrench.getItem() instanceof BaseEnergyToolItem energyTool) {
+                energyTool.tryConsumeUseEnergy(wrench, player);
+            } else if (player != null) {
                 wrench.hurtAndBreak(1, player, hand.asEquipmentSlot());
             }
+
+            level.setBlockAndUpdate(pos, state.setValue(FACING, next));
+            level.playSound(null, pos, SoundEvents.ITEM_FRAME_ROTATE_ITEM, SoundSource.BLOCKS, 1.0F, 1.2F);
         }
 
         return InteractionResult.SUCCESS;
