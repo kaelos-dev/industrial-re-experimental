@@ -49,6 +49,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         generateOreDrops();
+        generateIngotBlockDrops();
         generateRubberTreeDrops();
         generateCableDrops();
         generateMachineDrops();
@@ -60,6 +61,17 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
         multiOreDrop(ModBlocks.TIN_ORE, ModItems.RAW_TIN, 2.0F, 5.0F);
         multiOreDrop(ModBlocks.DEEPSLATE_TIN_ORE, ModItems.RAW_TIN, 2.0F, 5.0F);
         oreDrop(ModBlocks.DEEPSLATE_URANIUM_ORE, ModItems.RAW_URANIUM);
+    }
+
+    private void generateIngotBlockDrops() {
+        dropSelfAll(
+                ModBlocks.BRONZE_BLOCK,
+                ModBlocks.LEAD_BLOCK,
+                ModBlocks.STEEL_BLOCK,
+                ModBlocks.TIN_BLOCK,
+                ModBlocks.URANIUM_BLOCK,
+                ModBlocks.SILVER_BLOCK
+        );
     }
 
     private void generateRubberTreeDrops() {

@@ -3,6 +3,7 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.api.energy.VoltageTier;
 import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.storage.StorageBlock;
 import net.kaelos.icre.block.machine.generating.GeneratorBlock;
 import net.kaelos.icre.block.machine.producing.CompressorBlock;
 import net.kaelos.icre.block.machine.producing.ElectricFurnaceBlock;
@@ -38,6 +39,14 @@ public class ModBlocks {
             new OreBlock(prop, true));
     public static final DeferredBlock<OreBlock> DEEPSLATE_URANIUM_ORE = registerBlock("deepslate_uranium_ore", prop ->
             new OreBlock(prop, true));
+
+    // ==================== Ingot Blocks ====================
+    public static final DeferredBlock<StorageBlock> BRONZE_BLOCK = registerBlock("bronze_block", StorageBlock::new);
+    public static final DeferredBlock<StorageBlock> LEAD_BLOCK = registerBlock("lead_block", StorageBlock::new);
+    public static final DeferredBlock<StorageBlock> STEEL_BLOCK = registerBlock("steel_block", StorageBlock::new);
+    public static final DeferredBlock<StorageBlock> TIN_BLOCK = registerBlock("tin_block", StorageBlock::new);
+    public static final DeferredBlock<StorageBlock> URANIUM_BLOCK = registerBlock("uranium_block", StorageBlock::new);
+    public static final DeferredBlock<StorageBlock> SILVER_BLOCK = registerBlock("silver_block", StorageBlock::new);
 
     // ==================== Rubber Tree ====================
     public static final DeferredBlock<RubberLogBlock> RUBBER_LOG = registerBlock("rubber_log", RubberLogBlock::new);

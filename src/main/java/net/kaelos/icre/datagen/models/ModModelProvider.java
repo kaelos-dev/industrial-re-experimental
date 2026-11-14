@@ -21,6 +21,7 @@ public class ModModelProvider extends ModelProvider {
     protected void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
         registerMaterials(itemModels);
         registerOres(blockModels);
+        registerIngotBlocks(blockModels);
         registerTools(itemModels);
 
         RubberTreeModels.register(blockModels);
@@ -69,6 +70,12 @@ public class ModModelProvider extends ModelProvider {
         ModelHelpers.cubeBlocks(blockModels, "ore",
                 ModBlocks.LEAD_ORE, ModBlocks.DEEPSLATE_LEAD_ORE, ModBlocks.TIN_ORE,
                 ModBlocks.DEEPSLATE_TIN_ORE, ModBlocks.DEEPSLATE_URANIUM_ORE);
+    }
+
+    private static void registerIngotBlocks(BlockModelGenerators blockModels) {
+        ModelHelpers.cubeBlocks(blockModels, "storage",
+                ModBlocks.BRONZE_BLOCK, ModBlocks.LEAD_BLOCK, ModBlocks.STEEL_BLOCK,
+                ModBlocks.TIN_BLOCK, ModBlocks.URANIUM_BLOCK, ModBlocks.SILVER_BLOCK);
     }
 
     private static void registerTools(ItemModelGenerators itemModels) {

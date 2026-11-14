@@ -17,10 +17,12 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -41,7 +43,10 @@ public class CableBlock extends Block implements EntityBlock {
     private final Map<Direction, VoxelShape> armShapes = new EnumMap<>(Direction.class);
 
     public CableBlock(Properties properties, VoltageTier tier, boolean insulated, int radius) {
-        super(properties);
+        super(properties
+                .mapColor(insulated ? MapColor.WOOL : MapColor.METAL)
+                .strength(0.2F)
+                .sound(insulated ? SoundType.WOOL : SoundType.METAL));
         this.tier = tier;
         this.insulated = insulated;
         this.radius = radius;

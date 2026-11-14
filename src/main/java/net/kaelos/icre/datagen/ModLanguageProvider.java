@@ -106,6 +106,14 @@ public class ModLanguageProvider extends LanguageProvider {
         add(ModBlocks.DEEPSLATE_TIN_ORE.get(), "Deepslate Tin Ore", "Глубинная оловянная руда", "Глибинна олов'яна руда");
         add(ModBlocks.DEEPSLATE_URANIUM_ORE.get(), "Deepslate Uranium Ore", "Глубинная урановая руда", "Глибинна уранова руда");
 
+        // Storage
+        add(ModBlocks.BRONZE_BLOCK.get(), "Bronze Block", "Бронзовый блок", "Бронзовий блок");
+        add(ModBlocks.LEAD_BLOCK.get(), "Lead Block", "Свинцовый блок", "Свинцевий блок");
+        add(ModBlocks.STEEL_BLOCK.get(), "Steel Block", "Стальной блок", "Сталевий блок");
+        add(ModBlocks.TIN_BLOCK.get(), "Tin Block", "Оловянный блок", "Олов'яний блок");
+        add(ModBlocks.URANIUM_BLOCK.get(), "Uranium Block", "Урановый блок", "Урановий блок");
+        add(ModBlocks.SILVER_BLOCK.get(), "Silver Block", "Серебряный блок", "Срібний блок");
+
         // Raws
         add(ModItems.RAW_LEAD.get(), "Raw Lead", "Глыба свинца", "Брила свинцю");
         add(ModItems.RAW_TIN.get(), "Raw Tin", "Глыба олова", "Брила олова");

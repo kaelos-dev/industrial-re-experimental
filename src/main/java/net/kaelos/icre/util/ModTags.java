@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> ORE_BLOCKS = createTag("ore_blocks");
+        public static final TagKey<Block> STORAGE_BLOCKS = createTag("storage_blocks");
         public static final TagKey<Block> RUBBER_LOGS_BLOCKS = createTag("rubber_logs_blocks");
         public static final TagKey<Block> MACHINES = createTag("machines");
         public static final TagKey<Block> CABLES = createTag("cables");

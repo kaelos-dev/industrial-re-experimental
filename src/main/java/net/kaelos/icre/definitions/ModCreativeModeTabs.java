@@ -3,6 +3,7 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.block.base.BaseEntityMachineBlock;
 import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.storage.StorageBlock;
 import net.kaelos.icre.block.ore.OreBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -30,6 +31,7 @@ public class ModCreativeModeTabs {
                 ModItems.getGroup(ModItems.ItemGroup.CASING).forEach(output::accept);
                 ModItems.getGroup(ModItems.ItemGroup.DUST).forEach(output::accept);
                 ModBlocks.getBlocks(OreBlock.class).forEach(output::accept);
+                ModBlocks.getBlocks(StorageBlock.class).forEach(output::accept);
                 ModItems.getGroup(ModItems.ItemGroup.RAW).forEach(output::accept);
 
                 output.accept(ModItems.LATEX.get());

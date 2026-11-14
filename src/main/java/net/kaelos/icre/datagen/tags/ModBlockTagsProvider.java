@@ -3,6 +3,7 @@ package net.kaelos.icre.datagen.tags;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.block.base.BaseEntityMachineBlock;
 import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.storage.StorageBlock;
 import net.kaelos.icre.block.ore.OreBlock;
 import net.kaelos.icre.definitions.ModBlocks;
 import net.kaelos.icre.util.ModTags;
@@ -28,6 +29,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
         addOreTags();
+        addStorageTags();
         addRubberTags();
         addMachineTags();
         addCableTags();
@@ -46,6 +48,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         addAll(BlockTags.NEEDS_STONE_TOOL, ModBlocks.TIN_ORE, ModBlocks.DEEPSLATE_TIN_ORE);
         addAll(BlockTags.NEEDS_IRON_TOOL, ModBlocks.LEAD_ORE, ModBlocks.DEEPSLATE_LEAD_ORE);
         addAll(BlockTags.NEEDS_DIAMOND_TOOL, ModBlocks.DEEPSLATE_URANIUM_ORE);
+    }
+
+    private void addStorageTags() {
+        List<Block> storages = ModBlocks.getBlocks(StorageBlock.class);
+        addAll(ModTags.Blocks.STORAGE_BLOCKS, storages);
+        addAll(Tags.Blocks.STORAGE_BLOCKS, storages);
+        addAll(BlockTags.MINEABLE_WITH_PICKAXE, storages);
+        addAll(BlockTags.NEEDS_STONE_TOOL, storages);
     }
 
     private void addRubberTags() {
