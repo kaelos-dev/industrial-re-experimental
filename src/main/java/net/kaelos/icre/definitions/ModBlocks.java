@@ -3,12 +3,9 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.api.energy.VoltageTier;
 import net.kaelos.icre.block.cable.CableBlock;
+import net.kaelos.icre.block.machine.producing.*;
 import net.kaelos.icre.block.storage.StorageBlock;
 import net.kaelos.icre.block.machine.generating.GeneratorBlock;
-import net.kaelos.icre.block.machine.producing.CompressorBlock;
-import net.kaelos.icre.block.machine.producing.ElectricFurnaceBlock;
-import net.kaelos.icre.block.machine.producing.MaceratorBlock;
-import net.kaelos.icre.block.machine.producing.MetalFormerBlock;
 import net.kaelos.icre.block.ore.OreBlock;
 import net.kaelos.icre.block.rubber.*;
 import net.minecraft.core.Holder;
@@ -88,6 +85,7 @@ public class ModBlocks {
     public static final DeferredBlock<GeneratorBlock> GENERATOR = registerBlock("generator", GeneratorBlock::new);
 
     // ==================== Machines ====================
+    public static final DeferredBlock<IronFurnaceBlock> IRON_FURNACE = registerBlock("iron_furnace", IronFurnaceBlock::new);
     public static final DeferredBlock<MaceratorBlock> MACERATOR = registerBlock("macerator", MaceratorBlock::new);
     public static final DeferredBlock<MetalFormerBlock> METAL_FORMER = registerBlock("metal_former", MetalFormerBlock::new);
     public static final DeferredBlock<ElectricFurnaceBlock> ELECTRIC_FURNACE = registerBlock("electric_furnace", ElectricFurnaceBlock::new);

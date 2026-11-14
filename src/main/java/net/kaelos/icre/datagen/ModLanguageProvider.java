@@ -158,6 +158,7 @@ public class ModLanguageProvider extends LanguageProvider {
 
         // Generators & Machines
         add(ModBlocks.GENERATOR.get(), "Generator", "Генератор", "Генератор");
+        add(ModBlocks.IRON_FURNACE.get(), "Iron Furnace", "Железная печь", "Залізна піч");
         add(ModBlocks.MACERATOR.get(), "Macerator", "Дробитель", "Подрібнювач");
         add(ModBlocks.METAL_FORMER.get(), "Metal Former", "Металлоформовочный механизм", "Металоформувальний механізм");
         add(ModBlocks.ELECTRIC_FURNACE.get(), "Electric Furnace", "Электропечь", "Електропіч");

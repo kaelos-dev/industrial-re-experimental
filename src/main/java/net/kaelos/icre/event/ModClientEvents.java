@@ -3,6 +3,7 @@ package net.kaelos.icre.event;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.client.item.EnergyFillProperty;
 import net.kaelos.icre.client.screen.machine.generating.GeneratorScreen;
+import net.kaelos.icre.client.screen.machine.producing.IronFurnaceScreen;
 import net.kaelos.icre.client.screen.machine.producing.MetalFormerScreen;
 import net.kaelos.icre.client.screen.machine.producing.ProcessingMachineScreen;
 import net.kaelos.icre.definitions.ModMenuTypes;
@@ -21,6 +22,7 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenuTypes.GENERATOR_MENU.get(), GeneratorScreen::new);
+        event.register(ModMenuTypes.IRON_FURNACE_MENU.get(), IronFurnaceScreen::new);
 
         event.<ProcessingMachineMenu, ProcessingMachineScreen> register(
                 ModMenuTypes.MACERATOR_MENU.get(),

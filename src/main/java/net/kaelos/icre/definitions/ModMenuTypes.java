@@ -3,6 +3,7 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.menu.base.BaseContainerMenu;
 import net.kaelos.icre.menu.machine.generating.GeneratorMenu;
+import net.kaelos.icre.menu.machine.producing.IronFurnaceMenu;
 import net.kaelos.icre.menu.machine.producing.MetalFormerMenu;
 import net.kaelos.icre.menu.machine.producing.ProcessingMachineMenu;
 import net.minecraft.core.registries.Registries;
@@ -24,6 +25,8 @@ public class ModMenuTypes {
             registerMenu("generator_menu", GeneratorMenu::new);
 
     // ==================== Machines ====================
+    public static final DeferredHolder<MenuType<?>, MenuType<IronFurnaceMenu>> IRON_FURNACE_MENU =
+            registerMenu("iron_furnace_menu", IronFurnaceMenu::new);
     public static DeferredHolder<MenuType<?>, MenuType<ProcessingMachineMenu>> MACERATOR_MENU =
             registerMenu("macerator_menu", ModMenuTypes::createMaceratorMenu);
     public static final DeferredHolder<MenuType<?>, MenuType<MetalFormerMenu>> METAL_FORMER_MENU =

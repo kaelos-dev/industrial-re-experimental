@@ -4,10 +4,7 @@ import net.kaelos.icre.ICRE;
 import net.kaelos.icre.block.cable.CableBlock;
 import net.kaelos.icre.entity.block.electric.CableBlockEntity;
 import net.kaelos.icre.entity.block.machine.generating.GeneratorBlockEntity;
-import net.kaelos.icre.entity.block.machine.producing.CompressorBlockEntity;
-import net.kaelos.icre.entity.block.machine.producing.ElectricFurnaceBlockEntity;
-import net.kaelos.icre.entity.block.machine.producing.MaceratorBlockEntity;
-import net.kaelos.icre.entity.block.machine.producing.MetalFormerBlockEntity;
+import net.kaelos.icre.entity.block.machine.producing.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,6 +27,8 @@ public class ModBlockEntities {
             new BlockEntityType<>(GeneratorBlockEntity::new, ModBlocks.GENERATOR.get()));
 
     // ==================== Machines ====================
+    public static final Supplier<BlockEntityType<IronFurnaceBlockEntity>> IRON_FURNACE_BE = BLOCK_ENTITIES.register("iron_furnace", () ->
+            new BlockEntityType<>(IronFurnaceBlockEntity::new, ModBlocks.IRON_FURNACE.get()));
     public static final Supplier<BlockEntityType<MaceratorBlockEntity>> MACERATOR_BE = BLOCK_ENTITIES.register("macerator", () ->
             new BlockEntityType<>(MaceratorBlockEntity::new, ModBlocks.MACERATOR.get()));
     public static final Supplier<BlockEntityType<MetalFormerBlockEntity>> METAL_FORMER_BE = BLOCK_ENTITIES.register("metal_former", () ->

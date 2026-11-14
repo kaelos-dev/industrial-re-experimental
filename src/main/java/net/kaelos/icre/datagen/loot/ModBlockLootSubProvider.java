@@ -93,6 +93,7 @@ public class ModBlockLootSubProvider extends BlockLootSubProvider {
 
     private void generateMachineDrops() {
         dropSelf(ModBlocks.BASIC_MACHINE_CASING.get());
+        dropSelf(ModBlocks.IRON_FURNACE.get());
         ModBlocks.getBlocks(BaseEntityMachineBlock.class).forEach(machine ->
                 add(machine, this::createMachineDrops));
     }
