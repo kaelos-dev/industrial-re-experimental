@@ -1,6 +1,7 @@
 package net.kaelos.icre.datagen.recipe;
 
 import net.kaelos.icre.ICRE;
+import net.kaelos.icre.recipe.metalformer.MetalFormerMode;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -21,10 +22,13 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes() {
         registerCraftingRecipes();
+        registerFurnaceAndBlastingRecipes();
         registerMaceratorRecipes();
     }
 
     private void registerCraftingRecipes() {}
+
+    private void registerFurnaceAndBlastingRecipes() {}
 
     private void registerMaceratorRecipes() {}
 
@@ -90,10 +94,42 @@ public class ModRecipeProvider extends RecipeProvider {
         RecipeHelpers.saveCrafting(builder, result, unlock, this.toolOutput);
     }
 
-    // ==================== Shortcuts ====================
+    // ==================== Processing Shortcuts ====================
+    protected void furnace(ItemLike input, ItemLike result) {
+        RecipeHelpers.furnace(input, result, this.output);
+    }
+
     protected void smeltAndBlast(ItemLike input, ItemLike result) {
         RecipeHelpers.furnace(input, result, this.output);
         RecipeHelpers.blasting(input, result, this.output);
+    }
+
+    protected void macerator(ItemLike input, ItemLike result) {
+        RecipeHelpers.macerator(input, result, this.output);
+    }
+
+    protected void macerator(ItemLike input, ItemLike result, int count) {
+        RecipeHelpers.macerator(input, result, count, this.output);
+    }
+
+    protected void compressor(ItemLike input, ItemLike result) {
+        RecipeHelpers.compressor(input, result, this.output);
+    }
+
+    protected void compressor(ItemLike input, int inputCount, ItemLike result) {
+        RecipeHelpers.compressor(input, inputCount, result, this.output);
+    }
+
+    protected void compressor(ItemLike input, int inputCount, ItemLike result, int resultCount) {
+        RecipeHelpers.compressor(input, inputCount, result, resultCount, this.output);
+    }
+
+    protected void metalFormer(MetalFormerMode mode, ItemLike input, ItemLike result) {
+        RecipeHelpers.metalFormer(mode, input, result, this.output);
+    }
+
+    protected void metalFormer(MetalFormerMode mode, ItemLike input, ItemLike result, int count) {
+        RecipeHelpers.metalFormer(mode, input, result, count, this.output);
     }
 
     // ==================== Runner ====================

@@ -4,28 +4,33 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.kaelos.icre.definitions.ModRecipes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
-public record CompressorRecipe(Ingredient input, ItemStackTemplate output) implements Recipe<SingleRecipeInput> {
+public record CompressorRecipe(Ingredient input, int inputCount, ItemStackTemplate output) implements Recipe<SingleRecipeInput> {
     public static final MapCodec<CompressorRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
             Ingredient.CODEC.fieldOf("ingredient").forGetter(CompressorRecipe::input),
+            ExtraCodecs.POSITIVE_INT.optionalFieldOf("count", 1).forGetter(CompressorRecipe::inputCount),
             ItemStackTemplate.CODEC.fieldOf("result").forGetter(CompressorRecipe::output)
     ).apply(inst, CompressorRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, CompressorRecipe> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC, CompressorRecipe::input,
+            ByteBufCodecs.VAR_INT, CompressorRecipe::inputCount,
             ItemStackTemplate.STREAM_CODEC, CompressorRecipe::output,
             CompressorRecipe::new
     );
 
     @Override
     public boolean matches(@NonNull SingleRecipeInput recipeInput, @NonNull Level level) {
-        return this.input.test(recipeInput.item());
+        ItemStack stack = recipeInput.item();
+        return stack.getCount() >= this.inputCount && this.input.test(stack);
     }
 
     @Override

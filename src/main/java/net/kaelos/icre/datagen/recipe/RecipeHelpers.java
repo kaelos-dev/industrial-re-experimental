@@ -141,15 +141,23 @@ public class RecipeHelpers {
 
     // ==================== Compressor ====================
     public static void compressor(ItemLike input, ItemLike result, RecipeOutput output) {
-        compressor(autoName(input, result), input, result, 1, output);
+        compressor(autoName(input, result), input, 1, result, 1, output);
     }
 
-    public static void compressor(ItemLike input, ItemLike result, int count, RecipeOutput output) {
-        compressor(autoName(input, result), input, result, count, output);
+    public static void compressor(ItemLike input, ItemLike result, int resultCount, RecipeOutput output) {
+        compressor(autoName(input, result), input, 1, result, resultCount, output);
     }
 
-    private static void compressor(String name, ItemLike input, ItemLike result, int count, RecipeOutput output) {
-        CompressorRecipe recipe = new CompressorRecipe(Ingredient.of(input), new ItemStackTemplate(result.asItem(), count));
+    public static void compressor(ItemLike input, int inputCount, ItemLike result, RecipeOutput output) {
+        compressor(autoName(input, result), input, inputCount, result, 1, output);
+    }
+
+    public static void compressor(ItemLike input, int inputCount, ItemLike result, int resultCount, RecipeOutput output) {
+        compressor(autoName(input, result), input, inputCount, result, resultCount, output);
+    }
+
+    private static void compressor(String name, ItemLike input, int inputCount, ItemLike result, int resultCount, RecipeOutput output) {
+        CompressorRecipe recipe = new CompressorRecipe(Ingredient.of(input), inputCount, new ItemStackTemplate(result.asItem(), resultCount));
         output.accept(recipeKey("compressing/" + name), recipe, null);
     }
 
