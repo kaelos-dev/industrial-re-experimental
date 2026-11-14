@@ -3,6 +3,7 @@ package net.kaelos.icre.definitions;
 import net.kaelos.icre.ICRE;
 import net.kaelos.icre.recipe.CompressorRecipe;
 import net.kaelos.icre.recipe.MaceratorRecipe;
+import net.kaelos.icre.recipe.crafting.ToolShapelessRecipe;
 import net.kaelos.icre.recipe.metalformer.MetalFormerRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,6 +18,10 @@ public class ModRecipes {
             DeferredRegister.create(Registries.RECIPE_TYPE, ICRE.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
             DeferredRegister.create(Registries.RECIPE_SERIALIZER, ICRE.MOD_ID);
+
+    // ==================== Crafting ====================
+    public static final Supplier<RecipeSerializer<ToolShapelessRecipe>> TOOL_SHAPELESS_SERIALIZER = SERIALIZERS.register("tool_crafting_shapeless", () ->
+            new RecipeSerializer<>(ToolShapelessRecipe.CODEC, ToolShapelessRecipe.STREAM_CODEC));
 
     // ==================== Macerator ====================
     public static final Supplier<RecipeType<MaceratorRecipe>> MACERATOR = TYPES.register("macerating", () ->
